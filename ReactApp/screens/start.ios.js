@@ -37,10 +37,9 @@
       * Navigates to page from menu
       */
     navigate: function() {
-      this.props.navigator.push({
+      this.props.navigator.replace({
         title: "Проекты",
         component: Projects,
-        index: 2,
       });
     },
 

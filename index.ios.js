@@ -118,7 +118,7 @@
       }
 
       // Default Navbar Title
-      var title = 'Starter App';
+      var title = 'Стартовая';
       if(route.title != undefined) {
         title = route.title;
       }
