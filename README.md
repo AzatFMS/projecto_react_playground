@@ -1,2 +1,2 @@
-Устанвока:
-npm install
+Устанвока:<br/>
+<code>npm install</code>
