@@ -23,6 +23,7 @@
   var Projects = require('../screens/projects.ios');
   var ComingSoon = require('../screens/soon.ios');
   var FormExample = require('../modules/example/screens/forms.ios');
+  var Calendars = require('../screens/calendars.ios');
 
   var {
     StyleSheet,
@@ -76,9 +77,10 @@ var Menu = React.createClass({
     // ['**TITLE**', '**MODULE_NAME**']
     var links = [
       ['Проекты', Projects],
-      ['Инбокс', Index],
-      ['Заметки', FormExample],
-      ['Файлы', ComingSoon],
+      ['Календари', Calendars],
+      //['Инбокс', Index],
+      //['Заметки', FormExample],
+      //['Файлы', ComingSoon],
     ];
 
     // Build the actual Menu Items
