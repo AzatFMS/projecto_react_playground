@@ -69,18 +69,20 @@
           onSwipePrev={() => console.log('Back SWIPE')}
           onSwipeNext={() => console.log('Forward SWIPE')}/>
       </View>;
+      var datePicker =
+      <View style={styles.container}>
+        <DatePickerIOS
+          date={this.state.selectedPickerDate}
+          mode="date"
+          timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+          onDateChange={this.onDateChange}
+        />
+        <Text>Выбранная дата: {this.state.selectedPickerDate.toLocaleDateString()}</Text>
+      </View>;
 
       return (
         <View>
-          <View style={styles.container}>
-            <DatePickerIOS
-              date={this.state.selectedPickerDate}
-              mode="date"
-              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-              onDateChange={this.onDateChange}
-            />
-            <Text>Выбранная дата: {this.state.selectedPickerDate.toLocaleDateString()}</Text>
-          </View>
+          {calendar}
         </View>
       );
     }
