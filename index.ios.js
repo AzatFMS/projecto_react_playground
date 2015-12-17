@@ -177,4 +177,4 @@
 /* ==============================
   Done!
   =============================== */
-  AppRegistry.registerComponent('StarterKit', () => Application);
+  AppRegistry.registerComponent('PROJECTO', () => Application);

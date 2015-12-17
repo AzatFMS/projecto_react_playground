@@ -17,7 +17,8 @@
   var AppConfig = require('../config.ios');
 
   /* Screens / Pages */
-  // var AnotherPage = require('./tabbar.ios');
+var {Icon,} = require('react-native-icons');
+
 
   var {
     StyleSheet,
@@ -25,6 +26,7 @@
     Text,
     Component,
     ActivityIndicatorIOS,
+    TouchableOpacity,
   } = React;
 
 /* ==============================
@@ -33,24 +35,48 @@
   var Project = React.createClass({
 
     getInitialState: function() {
-
       return {
           isLoading: true,
           project: {},
+          targets: [],
+          members: [],
         };
     },
 
     componentDidMount: function() {
-      this.fetchResults();
+      this.fetchProjects();
     },
 
-    fetchResults: function() {
+    fetchProjects: function() {
        fetch('http://opt.organizer2016.ru/projects/view/' + this.props.route.project.id)
       .then(response => response.json())
       .then(jsonData => {
             this.setState({
                isLoading: false,
                project: jsonData,
+            });
+
+            this.fetchTargets();
+            this.fetchMembers();
+          })
+      .catch(error => console.dir(error));
+    },
+    fetchTargets: function() {
+       fetch('http://opt.organizer2016.ru/projects/targets/' + this.props.route.project.id)
+      .then(response => response.json())
+      .then(jsonData => {
+            this.setState({
+               targets: jsonData,
+            });
+          })
+      .catch(error => console.dir(error));
+    },
+    fetchMembers: function() {
+       fetch('http://opt.organizer2016.ru/projects/members/' + this.props.route.project.id)
+      .then(response => response.json())
+      .then(jsonData => {
+            this.setState({
+               members: jsonData,
             });
           })
       .catch(error => console.dir(error));
@@ -85,19 +111,48 @@
     renderResults: function() {
         var obsrvers = [];
         return (
-          <View style={[AppStyles.container], styles.container}>
-            <Text style={[styles.header]}>
-              {this.state.project.name}
-            </Text>
-            <Text style={[styles.text]}>
-              {this.getStatusName(this.state.project.project_status)}
-            </Text>
-            <Text style={[styles.text]}>
-              Автор: {this.state.project.user.formatted_name}
-            </Text>
-            <Text style={[styles.text]}>
-              {this.state.project.description}
-            </Text>
+          <View style={[AppStyles.container]}>
+            <View style={styles.container}>
+              <Text style={[styles.header]}>
+                {this.state.project.name}
+              </Text>
+              <Text style={[styles.text]}>
+                {this.getStatusName(this.state.project.project_status)}
+              </Text>
+              <Text style={[styles.text]}>
+                Автор: {this.state.project.user.formatted_name}
+              </Text>
+              <Text style={[styles.text]}>
+                {this.state.project.description}
+              </Text>
+            </View>
+            <View>
+              <Text style={styles.title}>Сводка</Text>
+                <TouchableOpacity
+                  style={styles.list_row}>
+                  <Icon
+                   name='fontawesome|flag-checkered'
+                   size={20}
+                   color='#777'
+                   style={styles.icon}
+                   />
+                  <Text style={styles.list_row_text}>
+                    Цели: { this.state.targets.length }
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.list_row}>
+                  <Icon
+                   name='fontawesome|user'
+                   size={20}
+                   color='#777'
+                   style={styles.icon}
+                   />
+                  <Text style={styles.list_row_text}>
+                    Участники: { this.state.members.length }
+                  </Text>
+                </TouchableOpacity>
+            </View>
           </View>
         );
       }
@@ -119,6 +174,30 @@
     text: {
       color: '#777',
     },
+    title: {
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 10,
+      backgroundColor: AppConfig.primaryColor,
+      color: '#FFF',
+      fontWeight: 'bold',
+    },
+    list_row: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: AppConfig.subtleGreyBorder,
+    },
+    list_row_text: {
+      color: '#777',
+    },
+    icon: {
+      width: 20,
+      height: 20,
+      marginRight: 10,
+    }
   });
 
 /* ==============================

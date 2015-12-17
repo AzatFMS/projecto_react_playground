@@ -49,7 +49,7 @@
 
     showProject: function(project) {
       this.props.navigator.push({
-        title: 'Проект',
+        title: project.name,
         component: Project,
         project: project,
         index: 2,
