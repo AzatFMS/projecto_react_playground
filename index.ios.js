@@ -28,6 +28,8 @@
   var Projects = require('./ReactApp/screens/projects.ios');
   var StartScreen = require('./ReactApp/screens/start.ios');
 
+  var UTIL = require('./ReactApp/util.ios');
+
   var {
     AppRegistry,
     Component,
@@ -47,7 +49,7 @@
   class CustomTitle extends React.Component {
     render() {
       return (
-        <Text style={[AppStyles.baseText, AppStyles.strong, AppStyles.navbar_title]}>{this.props.title}</Text>
+          <Text style={[AppStyles.baseText, AppStyles.strong, AppStyles.navbar_title]}>{UTIL.cutString(this.props.title, 30)}</Text>
       );
     }
   }

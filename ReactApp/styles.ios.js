@@ -265,5 +265,6 @@
       color: '#FFFFFF',
       bottom: 10,
       fontSize: 13,
+      writingDirection: 'ltr',
     },
   });

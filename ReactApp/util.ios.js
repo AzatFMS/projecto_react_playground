@@ -36,6 +36,13 @@ var UTIL = {
 	  */
 	firstIndexInObj: function(obj) {
 	  for (var a in obj) return a;
+	},
+
+	cutString: function(string, size) {
+		if (string && string.length > size) {
+			return string.substring(0,size) + '...';
+		}
+		return string;
 	}
 };
 
