@@ -25,12 +25,15 @@
   var FormExample = require('../modules/example/screens/forms.ios');
   var Calendars = require('../screens/calendars.ios');
 
+  var {Icon,} = require('react-native-icons');
+
   var {
     StyleSheet,
     View,
     Text,
     Component,
-    TouchableOpacity
+    TouchableOpacity,
+    Image,
   } = React;
 
 /* ==============================
@@ -38,6 +41,25 @@
   =============================== */
 var Menu = React.createClass({
   mixins: [Subscribable.Mixin],
+
+  getInitialState: function() {
+    return {
+        isLoading: true,
+        user: {},
+      };
+  },
+
+  fetchUser: function() {
+     fetch('http://opt.organizer2016.ru/accounts/accounts/current/')
+    .then(response => response.json())
+    .then(jsonData => {
+          this.setState({
+             isLoading: false,
+             user: jsonData,
+          });
+        })
+    .catch(error => console.dir(error));
+  },
 
   /**
     * Allow this component to see sidebar menu functions
@@ -51,6 +73,7 @@ var Menu = React.createClass({
     */
   componentDidMount: function() {
     this.addListenerOn(this.props.events, 'toggleMenu', this.onLeftButtonPress);
+    this.fetchUser();
   },
 
   /**
@@ -76,8 +99,8 @@ var Menu = React.createClass({
 
     // ['**TITLE**', '**MODULE_NAME**']
     var links = [
-      ['Проекты', Projects],
-      ['Календари', Calendars],
+      ['Проекты', Projects, 'fontawesome|briefcase'],
+      ['Календари', Calendars, 'fontawesome|calendar'],
       //['Инбокс', Index],
       //['Заметки', FormExample],
       //['Файлы', ComingSoon],
@@ -90,15 +113,47 @@ var Menu = React.createClass({
           style={[]}
           onPress={this.goToScreen.bind(this, links[i][0], links[i][1])}>
           <View style={styles.menuItem}>
+            <Icon
+             name={links[i][2]}
+             size={20}
+             color='#777'
+             style={styles.icon}
+             />
             <Text style={[AppStyles.baseText, styles.menuItemText]}>{links[i][0]}</Text>
           </View>
         </TouchableOpacity>
       );
     }
 
+    var avatar;
+    if (this.state.user.profileData && this.state.user.profileData.avatar) {
+      avatar = <Image
+        style={styles.thumbnail}
+        source={{uri: 'http://opt.organizer2016.ru/' + this.state.user.profileData.avatar}}
+        />;
+    } else {
+      avatar = <Icon
+       name={'fontawesome|user'}
+       size={30}
+       color={AppConfig.textMain}
+       style={styles.thumbnail}
+       />;
+    }
+
     return (
-      <View style={styles.menu}>
-        {linksJsx}
+      <View style={styles.container}>
+        <View>
+          <View style={styles.header}>
+            {avatar}
+            <View style={styles.headerRirgt}>
+              <Text style={styles.headerTitle}>{this.state.user.formatted_name}</Text>
+              <Text style={styles.headerSubtitle}>{this.state.user.workPost ? this.state.user.workPost.post_name : ''}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.menu}>
+          {linksJsx}
+        </View>
       </View>
     );
   },
@@ -108,25 +163,60 @@ var Menu = React.createClass({
   Styles
   =============================== */
   var styles = StyleSheet.create({
-    menu: {
+    container: {
       flex: 1,
+      backgroundColor: '#f9f9f9',
       width: AppConfig.windowWidth * 0.68,
       height: AppConfig.windowHeight,
-      backgroundColor: '#f9f9f9',
-      padding: 20,
       paddingTop: AppConfig.statusBarHeight,
     },
-    menuItem: {
+    header: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: "#e2e4e5",
-      paddingBottom: 10,
+    },
+    headerTitle: {
+      flex: 1,
+      color: AppConfig.textMain,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    headerSubtitle: {
+      flex: 1,
+      color: AppConfig.textMain,
+    },
+    menu: {
+      flex: 1,
+      paddingLeft: 10,
+      paddingBottom: 20,
+    },
+    menuItem: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: "#e2e4e5",
+      padding: 5,
     },
     menuItemText: {
-      fontSize: 17,
-      fontWeight: '800',
-      paddingTop: 10,
+      fontSize: 16,
+      fontWeight: 'bold',
       flex: 1,
       color: "#7e7e7e"
+    },
+    icon: {
+      width: 20,
+      height: 20,
+      marginRight: 10,
+    },
+    thumbnail: {
+      width: 40,
+      height: 40,
+      marginRight: 10,
+      borderRadius: 20,
     },
   });
 
