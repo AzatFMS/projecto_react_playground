@@ -13,8 +13,8 @@
   var React = require('react-native');
 
   // App Globals
-  var AppStyles = require('../styles.ios');
-  var AppConfig = require('../config.ios');
+  var AppStyles = require('../../styles.ios');
+  var AppConfig = require('../../config.ios');
 
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');

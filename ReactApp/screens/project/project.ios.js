@@ -13,13 +13,17 @@
   var React = require('react-native');
 
   // App Globals
-  var AppStyles = require('../styles.ios');
-  var AppConfig = require('../config.ios');
+  var AppStyles = require('../../styles.ios');
+  var AppConfig = require('../../config.ios');
 
   /* Screens / Pages */
 
 
   var ProjectResume = require('./project_resume.ios');
+  var ProjectTasks = require('./project_tasks.ios');
+  var ProjectEvents = require('./project_events.ios');
+  var ProjectNotes = require('./project_notes.ios');
+  var ProjectFiles = require('./project_files.ios');
 
   var {
     StyleSheet,
@@ -72,7 +76,7 @@
                 selectedTab: 'tasks',
               });
             }}>
-            <ProjectResume navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectTasks navigator={this.props.navigator} project={this.state.project}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'events'}
@@ -84,7 +88,7 @@
                 selectedTab: 'events',
               });
             }}>
-            <ProjectResume navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectEvents navigator={this.props.navigator} project={this.state.project}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'notes'}
@@ -96,7 +100,7 @@
                 selectedTab: 'notes',
               });
             }}>
-            <ProjectResume navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectNotes navigator={this.props.navigator} project={this.state.project}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'files'}
@@ -108,7 +112,7 @@
                 selectedTab: 'files',
               });
             }}>
-            <ProjectResume navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectFiles navigator={this.props.navigator} project={this.state.project}/>
           </TabBarIOS.Item>
         </TabBarIOS>
       );

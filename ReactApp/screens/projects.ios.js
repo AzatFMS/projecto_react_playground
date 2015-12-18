@@ -16,7 +16,7 @@
   var AppStyles = require('../styles.ios');
   var AppConfig = require('../config.ios');
 
-  var Project = require('./project.ios');
+  var Project = require('./project/project.ios');
 
   /* Screens / Pages */
   // var AnotherPage = require('./tabbar.ios');
