@@ -143,13 +143,13 @@ var Menu = React.createClass({
     return (
       <View style={styles.container}>
         <View>
-          <View style={styles.header}>
+          <TouchableOpacity style={styles.header}>
             {avatar}
             <View style={styles.headerRirgt}>
               <Text style={styles.headerTitle}>{this.state.user.formatted_name}</Text>
               <Text style={styles.headerSubtitle}>{this.state.user.workPost ? this.state.user.workPost.post_name : ''}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.menu}>
           {linksJsx}
@@ -182,7 +182,7 @@ var Menu = React.createClass({
       flex: 1,
       color: AppConfig.textMain,
       fontSize: 16,
-      fontWeight: 'bold',
+      //fontWeight: 'bold',
     },
     headerSubtitle: {
       flex: 1,
@@ -199,11 +199,11 @@ var Menu = React.createClass({
       alignItems: 'center',
       borderBottomWidth: 1,
       borderBottomColor: "#e2e4e5",
-      padding: 5,
+      padding: 10,
     },
     menuItemText: {
-      fontSize: 16,
-      fontWeight: 'bold',
+      fontSize: 20,
+      //fontWeight: 'bold',
       flex: 1,
       color: "#7e7e7e"
     },

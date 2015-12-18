@@ -38,6 +38,7 @@
       */
     "settings": new RNDBModel.create_db('settings'),
     "example": new RNDBModel.create_db('example'),
+    "main": new RNDBModel.create_db('main'),
   };
 
 /* ==============================
