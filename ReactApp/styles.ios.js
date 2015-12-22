@@ -267,4 +267,8 @@
       fontSize: 13,
       writingDirection: 'ltr',
     },
+    error: {
+      color: '#a94442',
+      fontSize: 16,
+    },
   });

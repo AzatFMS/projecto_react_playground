@@ -77,7 +77,7 @@
 
       var valid_password = FormValidation.refinement(
         FormValidation.String, function (password) {
-          if(password.length < 6) return false;
+          if(password.length < 2) return false;
           return true;
         }
       );
@@ -143,12 +143,37 @@
 
     login: function() {
       var value = this.refs.form.getValue();
+
       if (value) {
+        /*
         AlertIOS.alert(
           'Приветствуем',
           'Логин: "' + value.login + '" Пароль "' + value.password + '"',
         );
         this.setState({user_id: 1});
+        */
+        fetch('http://opt.organizer2016.ru/site/token/', {
+          method: 'POST',
+          body: 'login=' + value.login + '&password=' + value.password
+        })
+       .then(response => {
+         if (response.status != 200) {
+           this.setState({error: 'Некорректный логин/пароль'});
+           return Promise.reject(new Error(response.statusText));
+         } else {
+           this.setState({error: null});
+           return response;
+         }
+       })
+       .then(response => response.json())
+       .then(jsonData => {
+             AlertIOS.alert(
+               'Приветствуем',
+               'Вы вошли как "' + value.login + '"',
+             );
+             this.setState({user_id: jsonData.id, token: jsonData.token});
+           })
+       .catch(error => console.dir(error));
       }
     },
 
@@ -203,38 +228,42 @@
 
     renderLogin: function() {
       var Form = FormValidation.form.Form;
+      if (this.state.error) {
+        var error = <Text style={[AppStyles.centered, AppStyles.error]}>{this.state.error}</Text>;
+      }
 
       return (
-        <ScrollView automaticallyAdjustContentInsets={false}
-          style={[AppStyles.container]}
-          contentContainerStyle={[AppStyles.containerCentered, styles.container]}>
-          <View style={[AppStyles.paddingHorizontal]}>
+        <View style={styles.container}>
+           <View>
+              <View style={[AppStyles.paddingHorizontal]}>
 
-          <Text style={[AppStyles.baseText, AppStyles.h3, AppStyles.centered]}>
-            Вход
-          </Text>
+                <Text style={[AppStyles.baseText, AppStyles.h3, AppStyles.centered]}>
+                  Вход
+                </Text>
 
-            <View style={AppStyles.spacer_20} />
+                <View style={AppStyles.hr} />
 
-            <Form
-              ref="form"
-              type={this.state.form_fields}
-              value={this.state.form_values}
-              options={this.state.options} />
-          </View>
+                <Form
+                  ref="form"
+                  type={this.state.form_fields}
+                  value={this.state.form_values}
+                  options={this.state.options} />
 
-          <View style={AppStyles.hr} />
+                    {error}
 
-          <View style={[AppStyles.paddingHorizontal]}>
+                <View style={AppStyles.hr} />
 
-            <TouchableOpacity
-              style={[AppStyles.formButton, AppStyles.formButtonOutline]}
-              onPress={this.login}>
-              <Text style={[AppStyles.baseText, AppStyles.formButton_text, AppStyles.formButtonOutline_text]}>Войти</Text>
-            </TouchableOpacity>
-          </View>
+                <View style={[AppStyles.paddingHorizontal]}>
 
-        </ScrollView>
+                  <TouchableOpacity
+                    style={[AppStyles.formButton]}
+                    onPress={this.login}>
+                    <Text style={[AppStyles.baseText, AppStyles.formButton_text]}>Войти</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+        </View>
       );
     },
 
@@ -276,10 +305,10 @@
   =============================== */
   var styles = StyleSheet.create({
     container: {
-      paddingTop: 15,
+      flex: 1,
+      paddingTop: 50,
       paddingBottom: 20,
-      justifyContent: 'center',
-      alignItems: 'stretch',
+      justifyContent: 'flex-start',
     },
   });
 
