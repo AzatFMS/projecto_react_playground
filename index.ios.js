@@ -144,6 +144,8 @@
     login: function() {
       var value = this.refs.form.getValue();
 
+      this.setState({error: null});
+
       if (value) {
         /*
         AlertIOS.alert(
