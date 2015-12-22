@@ -154,6 +154,13 @@ var Menu = React.createClass({
         <View style={styles.menu}>
           {linksJsx}
         </View>
+        <View>
+          <TouchableOpacity
+            style={styles.logout}
+            onPress={this.props.logout}>
+              <Text style={styles.headerTitle}>Выйти</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   },
@@ -211,6 +218,12 @@ var Menu = React.createClass({
       width: 20,
       height: 20,
       marginRight: 10,
+    },
+    logout: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 10,
     },
     thumbnail: {
       width: 40,

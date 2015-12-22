@@ -28,6 +28,8 @@
   var Projects = require('./ReactApp/screens/projects.ios');
   var StartScreen = require('./ReactApp/screens/start.ios');
 
+  var FormValidation = require('tcomb-form-native');
+
   var UTIL = require('./ReactApp/util.ios');
 
   var {
@@ -37,6 +39,10 @@
     Navigator,
     Text,
     View,
+    TextInput,
+    ScrollView,
+    TouchableOpacity,
+    AlertIOS,
   } = React;
 
 /* ==============================
@@ -61,9 +67,44 @@
     mixins: [Subscribable.Mixin],
 
     getInitialState: function() {
+
+      var valid_login = FormValidation.refinement(
+        FormValidation.String, function (email) {
+          var re = /^[0-9-A-z_]{2,}$/i;
+          return re.test(email);
+        }
+      );
+
+      var valid_password = FormValidation.refinement(
+        FormValidation.String, function (password) {
+          if(password.length < 6) return false;
+          return true;
+        }
+      );
+
       return {
+        user_id: null,
         touchToClose: true,
         disableGestures: false,
+        show_save_msg: false,
+        form_fields: FormValidation.struct({
+          login: valid_login,
+          password: valid_password,
+        }),
+        form_values: {},
+        options: {
+          fields: {
+            login: {
+              label: 'Логин',
+              error: 'Некорректный логин',
+            },
+            password: {
+              label: 'Пароль',
+              error: 'Некорректный пароль',
+              password: true,
+            },
+          }
+        },
       };
     },
 
@@ -98,6 +139,21 @@
         title: title,
         component: link,
       });
+    },
+
+    login: function() {
+      var value = this.refs.form.getValue();
+      if (value) {
+        AlertIOS.alert(
+          'Приветствуем',
+          'Логин: "' + value.login + '" Пароль "' + value.password + '"',
+        );
+        this.setState({user_id: 1});
+      }
+    },
+
+    logout: function() {
+      this.setState({user_id: null});
     },
 
     /**
@@ -145,14 +201,48 @@
       );
     },
 
-    /**
-      * RENDER
-      */
-    render: function() {
+    renderLogin: function() {
+      var Form = FormValidation.form.Form;
+
+      return (
+        <ScrollView automaticallyAdjustContentInsets={false}
+          style={[AppStyles.container]}
+          contentContainerStyle={[AppStyles.containerCentered, styles.container]}>
+          <View style={[AppStyles.paddingHorizontal]}>
+
+          <Text style={[AppStyles.baseText, AppStyles.h3, AppStyles.centered]}>
+            Вход
+          </Text>
+
+            <View style={AppStyles.spacer_20} />
+
+            <Form
+              ref="form"
+              type={this.state.form_fields}
+              value={this.state.form_values}
+              options={this.state.options} />
+          </View>
+
+          <View style={AppStyles.hr} />
+
+          <View style={[AppStyles.paddingHorizontal]}>
+
+            <TouchableOpacity
+              style={[AppStyles.formButton, AppStyles.formButtonOutline]}
+              onPress={this.login}>
+              <Text style={[AppStyles.baseText, AppStyles.formButton_text, AppStyles.formButtonOutline_text]}>Войти</Text>
+            </TouchableOpacity>
+          </View>
+
+        </ScrollView>
+      );
+    },
+
+    renderMain: function() {
       return (
         <SideMenu
           ref="rootSidebarMenu"
-          menu={<Menu events={this.eventEmitter} navigate={this.navigate} />}
+          menu={<Menu events={this.eventEmitter} navigate={this.navigate} logout={this.logout}/>}
           touchToClose={this.state.touchToClose}
           disableGestures={this.state.disableGestures}>
 
@@ -167,6 +257,17 @@
 
         </SideMenu>
       );
+    },
+
+    /**
+      * RENDER
+      */
+    render: function() {
+      if (!this.state.user_id) {
+        return this.renderLogin();
+      } else {
+        return this.renderMain();
+      }
     }
   });
 
@@ -174,6 +275,12 @@
   Styles
   =============================== */
   var styles = StyleSheet.create({
+    container: {
+      paddingTop: 15,
+      paddingBottom: 20,
+      justifyContent: 'center',
+      alignItems: 'stretch',
+    },
   });
 
 /* ==============================
