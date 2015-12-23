@@ -94,7 +94,16 @@
     renderTask: function(task) {
 
         var status_icon = <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
-        var private_icon, repeat_icon, priority_icon;
+        var private_icon,
+        repeat_icon,
+        priority_icon,
+        liable;
+
+        if (task.liable) {
+          liable = <Text style={styles.list_row_subtitle}>
+            {task.liable.formatted_name}
+          </Text>
+        }
         if (task.private) {
            private_icon =
           <Icon
@@ -143,9 +152,7 @@
               <Text style={styles.list_row_title}>
                 {task.name}
               </Text>
-              <Text style={styles.list_row_subtitle}>
-                {task.liable ? task.liable.formatted_name : ''}
-              </Text>
+              {liable}
             </View>
             {time_end}
           </TouchableOpacity>
@@ -202,21 +209,21 @@
     private_icon: {
       width: 14,
       height: 14,
-      marginBottom: 5,
+      marginTop: 2,
+      marginBottom: 2,
     },
     priority_icon: {
-      //backgroundColor: '#dd1f00',
       color: '#dd1f00',
       fontSize: 10,
-      marginBottom: 5,
+      marginTop: 2,
+      marginBottom: 2,
       fontWeight: 'bold',
-      //padding: 2,
-      //borderRadius: 4,
     },
     repeat_icon: {
       width: 14,
       height: 14,
-      marginBottom: 5,
+      marginTop: 2,
+      marginBottom: 2,
     },
     right_block: {
       width: 60,
