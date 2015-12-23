@@ -19,6 +19,8 @@
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');
 
+  var Util = require('../../util.ios');
+
 
   var {
     StyleSheet,
@@ -50,7 +52,7 @@
     },
 
     fetchNotes: function() {
-       fetch('http://opt.organizer2016.ru/projects/notes/' + this.props.project.id)
+       fetch(Util.buildUrl('/projects/notes/' + this.props.project.id))
       .then(response => response.json())
       .then(jsonData => {
             this.setState({

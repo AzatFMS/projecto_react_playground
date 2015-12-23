@@ -76,6 +76,8 @@
     render: function() {
       if (this.state.isLoading) {
         return this.renderLoadingMessage();
+      } else if (!this.state.tasks.length) {
+        return this.renderNoTasks();
       } else {
         return this.renderResults();
       }
@@ -91,54 +93,66 @@
           </View>
         );
     },
+    renderNoTasks: function() {
+      return (
+          <View style={[AppStyles.container, AppStyles.containerCentered]}>
+            <Text style={AppStyles.baseText}>Нет задач</Text>
+          </View>
+        );
+    },
     renderTask: function(task) {
 
-        var status_icon = <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
-        var private_icon,
+        var status_icon,
+        private_icon,
         repeat_icon,
         priority_icon,
-        liable;
+        liable,
+        time_end;
+        if (!task.not_available)
+        {
+          time_end = task.time_end ?
+          <View style={styles.right_block}>
+            <Text style={styles.task_date}>{task.formattedTimeEnd}</Text>
+            <Text style={styles.task_time}>{moment.unix(task.time_end).format("HH:mm")}</Text>
+          </View>
+          :
+          <View style={styles.right_block}>
+            <Text style={styles.without_time_end}>Без срока</Text>
+          </View>;
 
-        if (task.liable) {
-          liable = <Text style={styles.list_row_subtitle}>
-            {task.liable.formatted_name}
-          </Text>
-        }
-        if (task.private) {
-           private_icon =
-          <Icon
-             name={'fontawesome|user-secret'}
-             size={14}
-             color={AppConfig.textMain}
-             style={styles.private_icon}
-             />;
-        }
+          status_icon =
+          <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
 
-        if (task.repeat_serial_id) {
-          repeat_icon =
-          <Icon
-             name={'fontawesome|clone'}
-             size={14}
-             color={AppConfig.textMain}
-             style={styles.repeat_icon}
-             />;
-        }
+          if (task.liable) {
+            liable = <Text style={styles.list_row_subtitle}>
+              {task.liable.formatted_name}
+            </Text>
+          }
+          if (task.private) {
+             private_icon =
+            <Icon
+               name={'fontawesome|user-secret'}
+               size={14}
+               color={AppConfig.textMain}
+               style={styles.private_icon}
+               />;
+          }
 
-        if (task.priority_id) {
-          priority_icon =
-          <Text style={styles.priority_icon}>{Util.taskHelper.getSignByPriority(task.priority_id)}</Text>;
-        }
+          if (task.repeat_serial_id) {
+            repeat_icon =
+            <Icon
+               name={'fontawesome|clone'}
+               size={14}
+               color={AppConfig.textMain}
+               style={styles.repeat_icon}
+               />;
+          }
 
-        var time_end = task.time_end ?
-        <View style={styles.right_block}>
-          <Text style={styles.task_date}>{task.formattedTimeEnd}</Text>
-          <Text style={styles.task_time}>{moment.unix(task.time_end).format("HH:mm")}</Text>
-        </View>
-        :
-        <View style={styles.right_block}>
-          <Text style={styles.without_time_end}>Без срока</Text>
-        </View>
-        ;
+          if (task.priority_id) {
+            priority_icon =
+            <Text style={styles.priority_icon}>{Util.taskHelper.getSignByPriority(task.priority_id)}</Text>;
+          }
+        }
 
         return (
           <TouchableOpacity style={styles.list_row}>
