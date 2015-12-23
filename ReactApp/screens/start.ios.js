@@ -25,6 +25,8 @@
 
   var {Icon,} = require('react-native-icons');
 
+  var Store = require('../store');
+
   var {
     StyleSheet,
     View,
@@ -35,21 +37,17 @@
   } = React;
 
 var ANIMATE_TIME = 1000;
+
 /* ==============================
   View
   =============================== */
   var Start = React.createClass({
 
     getInitialState: function() {
-
-      //AsyncStorage.setItem('current_user_id', '10');
-      AsyncStorage.getItem('current_user_id')
-      .then((value) => {
-        console.log(value);
-      });
-
       return {
           posAnim: new Animated.Value(0),
+          token_id: Store.getItem('token_id'),
+          token: Store.getItem('token'),
         };
     },
 
@@ -92,6 +90,9 @@ var ANIMATE_TIME = 1000;
     render() {
       return (
         <View style={[AppStyles.container, AppStyles.containerCentered]}>
+            <View>
+              <Text>{this.state.token_id} - {this.state.token}</Text>
+            </View>
              <View>
                <Animated.View
                 style={[{left: this.state.posAnim}, styles.animated ]}>

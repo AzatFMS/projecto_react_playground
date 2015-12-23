@@ -28,9 +28,12 @@
   var Projects = require('./ReactApp/screens/projects.ios');
   var StartScreen = require('./ReactApp/screens/start.ios');
 
+  var Store = require('./ReactApp/store');
+
   var FormValidation = require('tcomb-form-native');
 
   var UTIL = require('./ReactApp/util.ios');
+
 
   var {
     AppRegistry,
@@ -43,6 +46,7 @@
     ScrollView,
     TouchableOpacity,
     AlertIOS,
+    AsyncStorage,
   } = React;
 
 /* ==============================
@@ -147,13 +151,7 @@
       this.setState({error: null});
 
       if (value) {
-        /*
-        AlertIOS.alert(
-          'Приветствуем',
-          'Логин: "' + value.login + '" Пароль "' + value.password + '"',
-        );
-        this.setState({user_id: 1});
-        */
+
         fetch('http://opt.organizer2016.ru/site/token/', {
           method: 'POST',
           body: 'login=' + value.login + '&password=' + value.password
@@ -173,6 +171,10 @@
                'Приветствуем',
                'Вы вошли как "' + value.login + '"',
              );
+             AsyncStorage.setItem('token_id', jsonData.id);
+             AsyncStorage.setItem('token', jsonData.token);
+             Store.setItem('token_id', jsonData.id);
+             Store.setItem('token', jsonData.token);
              this.setState({user_id: jsonData.id, token: jsonData.token});
            })
        .catch(error => console.dir(error));

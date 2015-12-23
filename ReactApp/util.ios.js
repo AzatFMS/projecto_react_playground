@@ -9,6 +9,8 @@
 // React Plugins
 var React = require('react-native');
 
+var Store = require('./store');
+
 var {
 } = React;
 
@@ -43,6 +45,12 @@ var UTIL = {
 			return string.substring(0,size) + '...';
 		}
 		return string;
+	},
+	buildUrl: function(url) {
+		//url = url.search('\?') != -1 ? url + '?' : url;
+		var result  = 'http://opt.organizer2016.ru' + url + '?token_id=' + Store.getItem('token_id') + '&token=' + Store.getItem('token');
+		console.log(result);
+		return result;
 	}
 };
 

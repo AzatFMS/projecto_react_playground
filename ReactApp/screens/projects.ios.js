@@ -18,8 +18,9 @@
 
   var Project = require('./project/project.ios');
 
-  /* Screens / Pages */
-  // var AnotherPage = require('./tabbar.ios');
+  var Util = require('../util.ios');
+
+  var Store = require('../store');
 
   var {
     StyleSheet,
@@ -98,11 +99,12 @@
   },
 
   componentDidMount: function() {
+    console.log(Store.getItem('token_id'));
     this.fetchResults();
   },
   fetchResults: function() {
     var parent = this.props.route.parentProject ? this.props.route.parentProject.id : 0;
-     fetch('http://opt.organizer2016.ru/projects/list/')
+     fetch(Util.buildUrl('/projects/list/'))
     .then(response => response.json())
     .then(jsonData => {
           this.setState({
