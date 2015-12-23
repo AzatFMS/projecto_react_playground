@@ -25,6 +25,8 @@
   var FormExample = require('../modules/example/screens/forms.ios');
   var Calendars = require('../screens/calendars.ios');
 
+  var Util = require('../util.ios');
+
   var {Icon,} = require('react-native-icons');
 
   var {
@@ -50,7 +52,7 @@ var Menu = React.createClass({
   },
 
   fetchUser: function() {
-     fetch('http://opt.organizer2016.ru/accounts/accounts/current/')
+     fetch(Util.buildUrl('/accounts/accounts/current/'))
     .then(response => response.json())
     .then(jsonData => {
           this.setState({

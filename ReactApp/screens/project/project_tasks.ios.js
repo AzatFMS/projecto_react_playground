@@ -12,9 +12,12 @@
   // React
   var React = require('react-native');
 
+  var moment = require('moment');
   // App Globals
   var AppStyles = require('../../styles.ios');
   var AppConfig = require('../../config.ios');
+
+  var Util = require('../../util.ios');
 
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');
@@ -28,6 +31,7 @@
     ActivityIndicatorIOS,
     TouchableOpacity,
     ListView,
+    ScrollView,
   } = React;
 
 /* ==============================
@@ -50,7 +54,7 @@
     },
 
     fetchTasks: function() {
-       fetch('http://opt.organizer2016.ru/projects/tasks/' + this.props.project.id + '?with_members=0')
+       fetch(Util.buildUrl('/projects/tasks/' + this.props.project.id + '?with_members=0'))
       .then(response => response.json())
       .then(jsonData => {
             this.setState({
@@ -79,11 +83,45 @@
           </View>
         );
     },
+    renderTask: function(task) {
+
+        var left_sign = <View style={[styles.left_block, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
+
+
+        var time_end = task.time_end ?
+        <View style={styles.right_block}>
+          <Text style={styles.task_date}>{task.formattedTimeEnd}</Text>
+          <Text style={styles.task_time}>{moment.unix(task.time_end).format("HH:mm")}</Text>
+        </View>
+        :
+        <View style={styles.right_block}>
+          <Text style={styles.without_time_end}>Без срока</Text>
+        </View>
+        ;
+
+        return (
+          <TouchableOpacity style={styles.list_row}>
+            {left_sign}
+            <View style={{flex: 1}}>
+              <Text style={styles.list_row_title}>
+                {task.name}
+              </Text>
+              <Text style={styles.list_row_subtitle}>
+                {task.liable.formatted_name}
+              </Text>
+            </View>
+            {time_end}
+          </TouchableOpacity>
+        );
+      },
     renderResults: function() {
         return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <Text style={[AppStyles.baseText, AppStyles.p]}>Задачи</Text>
-          </View>
+          <ScrollView style={styles.container}>
+            <ListView
+            dataSource={this.state.tasksDataSource}
+            renderRow={this.renderTask}
+            />
+          </ScrollView>
         );
       }
 
@@ -94,23 +132,8 @@
   =============================== */
   var styles = StyleSheet.create({
     container: {
-      padding: 10,
-    },
-    header: {
-      fontWeight: 'bold',
-      fontSize: 14,
-      color: '#777',
-    },
-    text: {
-      color: '#777',
-    },
-    title: {
-      paddingTop: 5,
-      paddingBottom: 5,
-      paddingLeft: 10,
-      backgroundColor: AppConfig.primaryColor,
-      color: '#FFF',
-      fontWeight: 'bold',
+      flex: 1,
+      marginBottom: 50,
     },
     list_row: {
       flex: 1,
@@ -120,14 +143,40 @@
       borderBottomWidth: 1,
       borderBottomColor: AppConfig.subtleGreyBorder,
     },
-    list_row_text: {
-      color: '#777',
+    list_row_title: {
+      fontWeight: 'bold',
+      color:  AppConfig.textMain,
     },
-    icon: {
-      width: 20,
-      height: 20,
+    list_row_subtitle: {
+      color:  AppConfig.textMain,
+    },
+    left_block: {
+      width: 10,
+      height: 10,
       marginRight: 10,
-    }
+      borderRadius: 5,
+      backgroundColor: 'green',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    right_block: {
+      width: 60,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    task_date: {
+      color:  AppConfig.textMain,
+      fontSize: 10,
+    },
+    task_time: {
+      color:  AppConfig.textMain,
+      fontSize: 16,
+    },
+    without_time_end: {
+      color:  AppConfig.textMain,
+      fontSize: 10,
+    },
   });
 
 /* ==============================

@@ -64,7 +64,7 @@
                 selectedTab: 'resume',
               });
             }}>
-            <ProjectResume navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectResume navigator={this.props.navigator} project={this.state.project} style={styles.tab_content}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'tasks'}
@@ -76,7 +76,7 @@
                 selectedTab: 'tasks',
               });
             }}>
-            <ProjectTasks navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectTasks navigator={this.props.navigator} project={this.state.project} style={styles.tab_content}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'events'}
@@ -88,7 +88,7 @@
                 selectedTab: 'events',
               });
             }}>
-            <ProjectEvents navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectEvents navigator={this.props.navigator} project={this.state.project} style={styles.tab_content}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'notes'}
@@ -100,7 +100,7 @@
                 selectedTab: 'notes',
               });
             }}>
-            <ProjectNotes navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectNotes navigator={this.props.navigator} project={this.state.project} style={styles.tab_content}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item
             selected={this.state.selectedTab === 'files'}
@@ -112,7 +112,7 @@
                 selectedTab: 'files',
               });
             }}>
-            <ProjectFiles navigator={this.props.navigator} project={this.state.project}/>
+            <ProjectFiles navigator={this.props.navigator} project={this.state.project} style={styles.tab_content}/>
           </TabBarIOS.Item>
         </TabBarIOS>
       );
@@ -124,7 +124,9 @@
   Styles
   =============================== */
   var styles = StyleSheet.create({
-
+    tab_content: {
+      //paddingBottom: 100,
+    }
   });
 
 /* ==============================

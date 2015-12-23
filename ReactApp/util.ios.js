@@ -47,10 +47,36 @@ var UTIL = {
 		return string;
 	},
 	buildUrl: function(url) {
-		//url = url.search('\?') != -1 ? url + '?' : url;
-		var result  = 'http://opt.organizer2016.ru' + url + '?token_id=' + Store.getItem('token_id') + '&token=' + Store.getItem('token');
+		url = url.indexOf("?") != -1 ? url + '&' : url + '?';
+		var result  = 'http://opt.organizer2016.ru' + url + 'token_id=' + Store.getItem('token_id') + '&token=' + Store.getItem('token');
 		console.log(result);
 		return result;
+	},
+	taskHelper: {
+		getColorByStatus: function(status) {
+			switch(status) {
+                case 0:
+                case '0':
+                    return '#afafaf';
+                case 1:
+                case '1':
+                    return '#f4d447';
+                case 2:
+                case '2':
+                    return '#ec7014';
+                case 3:
+                case '3':
+                    return '#4292c6';
+                case 4:
+                case '4':
+                    return '#238b45';
+                case 5:
+                case '5':
+                    return '#b30000';
+                default:
+                    return '#cccccc';
+            }
+		}
 	}
 };
 

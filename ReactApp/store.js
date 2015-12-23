@@ -13,6 +13,12 @@
     },
     getItem: function(key) {
       return this.items[key];
+    },
+    deleteItem: function(key) {
+      delete this.items[key];
+    },
+    clear: function() {
+      this.items = {};
     }
   };
 

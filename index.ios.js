@@ -183,6 +183,8 @@
 
     logout: function() {
       this.setState({user_id: null});
+      Store.clear();
+      AsyncStorage.clear();
     },
 
     /**

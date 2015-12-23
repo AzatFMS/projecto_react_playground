@@ -99,7 +99,6 @@
   },
 
   componentDidMount: function() {
-    console.log(Store.getItem('token_id'));
     this.fetchResults();
   },
   fetchResults: function() {
@@ -169,10 +168,10 @@
     },
     list_row_title: {
       fontWeight: 'bold',
-      color: '#777',
+      color:  AppConfig.textMain,
     },
     list_row_subtitle: {
-      color: '#777',
+      color:  AppConfig.textMain,
     },
     right_btn: {
       width: 40,
@@ -181,7 +180,7 @@
       justifyContent: 'center',
     },
     right_btn_arrow: {
-      color: '#777',
+      color:  AppConfig.textMain,
       fontSize: 30,
     },
   });
