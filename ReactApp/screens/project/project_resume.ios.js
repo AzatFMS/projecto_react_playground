@@ -64,7 +64,7 @@
       .catch(error => console.dir(error));
     },
     fetchTargets: function() {
-       fetch('http://opt.organizer2016.ru/projects/targets/' + this.props.project.id)
+       fetch(Util.buildUrl('/projects/targets/' + this.props.project.id))
       .then(response => response.json())
       .then(jsonData => {
             this.setState({
@@ -74,7 +74,7 @@
       .catch(error => console.dir(error));
     },
     fetchMembers: function() {
-       fetch('http://opt.organizer2016.ru/projects/members/' + this.props.project.id)
+       fetch(Util.buildUrl('/projects/members/' + this.props.project.id))
       .then(response => response.json())
       .then(jsonData => {
             this.setState({

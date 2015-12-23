@@ -47,6 +47,7 @@
     TouchableOpacity,
     AlertIOS,
     AsyncStorage,
+    ActivityIndicatorIOS,
   } = React;
 
 /* ==============================
@@ -87,6 +88,7 @@
       );
 
       return {
+        isLoading: true,
         user_id: null,
         touchToClose: true,
         disableGestures: false,
@@ -110,6 +112,31 @@
           }
         },
       };
+    },
+
+    componentDidMount: function() {
+      var _self = this;
+      AsyncStorage.multiGet(['token_id','token'])
+      .then(function(data){
+          var token_id, token;
+          if (data[0][0] == 'token_id') {
+            token_id = data[0][1];
+          }
+          if (data[1][0] == 'token') {
+            token = data[1][1];
+          }
+
+          if (token_id && token) {
+              console.log(token_id,token);
+            Store.setItem('token_id', token_id);
+            Store.setItem('token', token);
+            _self.setState({user_id: token_id, token: token});
+            _self.setState({isLoading: false});
+          }
+      })
+      .then(function() {
+        _self.setState({isLoading: false});
+      });
     },
 
     /**
@@ -150,13 +177,16 @@
 
       this.setState({error: null});
 
+
       if (value) {
+        this.setState({isLoading: true});
 
         fetch('http://opt.organizer2016.ru/site/token/', {
           method: 'POST',
           body: 'login=' + value.login + '&password=' + value.password
         })
        .then(response => {
+         this.setState({isLoading: false});
          if (response.status != 200) {
            this.setState({error: 'Некорректный логин/пароль'});
            return Promise.reject(new Error(response.statusText));
@@ -294,11 +324,25 @@
       );
     },
 
+    renderLoadingMessage: function() {
+      return (
+          <View style={[AppStyles.container, AppStyles.containerCentered]}>
+            <ActivityIndicatorIOS
+              style={[styles.centering, {height: 80}]}
+              size="large"
+              color="#777"
+            />
+          </View>
+        );
+    },
+
     /**
       * RENDER
       */
     render: function() {
-      if (!this.state.user_id) {
+      if (this.state.isLoading) {
+        return this.renderLoadingMessage();
+      } else if (!this.state.user_id) {
         return this.renderLogin();
       } else {
         return this.renderMain();
