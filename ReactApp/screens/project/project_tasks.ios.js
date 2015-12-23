@@ -86,9 +86,9 @@
     renderTask: function(task) {
 
         var status_icon = <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
-
+        var private_icon, repeat_icon, priority_icon;
         if (task.private) {
-          var private_icon =
+           private_icon =
           <Icon
              name={'fontawesome|user-secret'}
              size={14}
@@ -98,7 +98,7 @@
         }
 
         if (task.repeat_serial_id) {
-          var repeat_icon =
+          repeat_icon =
           <Icon
              name={'fontawesome|clone'}
              size={14}
@@ -108,7 +108,7 @@
         }
 
         if (task.priority_id) {
-          var priority_icon =
+          priority_icon =
           <Text style={styles.priority_icon}>{Util.taskHelper.getSignByPriority(task.priority_id)}</Text>;
         }
 
@@ -136,7 +136,7 @@
                 {task.name}
               </Text>
               <Text style={styles.list_row_subtitle}>
-                {task.liable.formatted_name}
+                {task.liable ? task.liable.formatted_name : ''}
               </Text>
             </View>
             {time_end}
