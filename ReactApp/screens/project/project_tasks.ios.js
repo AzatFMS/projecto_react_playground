@@ -57,6 +57,14 @@
        fetch(Util.buildUrl('/projects/tasks/' + this.props.project.id + '?with_members=0'))
       .then(response => response.json())
       .then(jsonData => {
+
+            jsonData
+            .sort(function(a, b) {
+                return parseInt(b.time_end) - parseInt(a.time_end);
+            })
+            .sort(function(a, b) {
+                return parseInt(b.priority_id) - parseInt(a.priority_id);
+            });
             this.setState({
                isLoading: false,
                tasks: jsonData,
@@ -197,11 +205,13 @@
       marginBottom: 5,
     },
     priority_icon: {
-      backgroundColor: '#dd1f00',
-      color: '#FFF',
+      //backgroundColor: '#dd1f00',
+      color: '#dd1f00',
       fontSize: 10,
-      padding: 2,
-      borderRadius: 4,
+      marginBottom: 5,
+      fontWeight: 'bold',
+      //padding: 2,
+      //borderRadius: 4,
     },
     repeat_icon: {
       width: 14,
