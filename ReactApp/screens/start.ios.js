@@ -90,9 +90,6 @@ var ANIMATE_TIME = 1000;
     render() {
       return (
         <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <View>
-              <Text>{this.state.token_id} - {this.state.token}</Text>
-            </View>
              <View>
                <Animated.View
                 style={[{left: this.state.posAnim}, styles.animated ]}>

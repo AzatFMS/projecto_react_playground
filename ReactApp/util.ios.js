@@ -76,6 +76,13 @@ var UTIL = {
                 default:
                     return '#cccccc';
             }
+		},
+		getSignByPriority: function(priority_id) {
+			var label = '';
+      for (var i = 0; i < priority_id; i++) {
+          label += '!';
+      }
+      return label;
 		}
 	}
 };

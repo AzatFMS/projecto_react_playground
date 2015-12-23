@@ -85,8 +85,32 @@
     },
     renderTask: function(task) {
 
-        var left_sign = <View style={[styles.left_block, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
+        var status_icon = <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
 
+        if (task.private) {
+          var private_icon =
+          <Icon
+             name={'fontawesome|user-secret'}
+             size={14}
+             color={AppConfig.textMain}
+             style={styles.private_icon}
+             />;
+        }
+
+        if (task.repeat_serial_id) {
+          var repeat_icon =
+          <Icon
+             name={'fontawesome|clone'}
+             size={14}
+             color={AppConfig.textMain}
+             style={styles.repeat_icon}
+             />;
+        }
+
+        if (task.priority_id) {
+          var priority_icon =
+          <Text style={styles.priority_icon}>{Util.taskHelper.getSignByPriority(task.priority_id)}</Text>;
+        }
 
         var time_end = task.time_end ?
         <View style={styles.right_block}>
@@ -101,7 +125,12 @@
 
         return (
           <TouchableOpacity style={styles.list_row}>
-            {left_sign}
+            <View style={styles.left_block}>
+              {status_icon}
+              {priority_icon}
+              {private_icon}
+              {repeat_icon}
+            </View>
             <View style={{flex: 1}}>
               <Text style={styles.list_row_title}>
                 {task.name}
@@ -151,13 +180,33 @@
       color:  AppConfig.textMain,
     },
     left_block: {
-      width: 10,
-      height: 10,
       marginRight: 10,
-      borderRadius: 5,
-      backgroundColor: 'green',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    status_icon: {
+      width: 14,
+      height: 14,
+      borderRadius: 7,
+      marginBottom: 5,
+    },
+    private_icon: {
+      width: 14,
+      height: 14,
+      marginBottom: 5,
+    },
+    priority_icon: {
+      backgroundColor: '#dd1f00',
+      color: '#FFF',
+      fontSize: 10,
+      padding: 2,
+      borderRadius: 4,
+    },
+    repeat_icon: {
+      width: 14,
+      height: 14,
+      marginBottom: 5,
     },
     right_block: {
       width: 60,
