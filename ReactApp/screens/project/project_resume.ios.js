@@ -26,12 +26,14 @@
   var {
     StyleSheet,
     View,
+    ScrollView,
     Text,
     Component,
     ActivityIndicatorIOS,
     TouchableOpacity,
     Modal,
     ListView,
+    Image,
   } = React;
 
 /* ==============================
@@ -49,14 +51,18 @@
             rowHasChanged: (row1, row2) => row1 !== row2,
           }),
           showTargets: false,
+          membersDataSource: new ListView.DataSource({
+            rowHasChanged: (row1, row2) => row1 !== row2,
+          }),
+          showMemebrs: false,
         };
     },
 
     componentDidMount: function() {
-      this.fetchProjects();
+      this.fetchProject();
     },
 
-    fetchProjects: function() {
+    fetchProject: function() {
        fetch(Util.buildUrl('/projects/view/' + this.props.project.id))
       .then(response => response.json())
       .then(jsonData => {
@@ -87,6 +93,7 @@
       .then(jsonData => {
             this.setState({
                members: jsonData,
+               membersDataSource: this.state.membersDataSource.cloneWithRows(jsonData),
             });
           })
       .catch(error => console.dir(error));
@@ -136,10 +143,45 @@
           </View>
         );
       },
+      renderMember: function(member) {
+
+        var avatar, workpost;
+        if (member.profileData && member.profileData.avatar) {
+          avatar = <Image
+            style={styles.thumbnail}
+            source={{uri: 'http://opt.organizer2016.ru/' + member.profileData.avatar}}
+            />;
+        } else {
+          avatar = <Icon
+           name={'fontawesome|user'}
+           size={30}
+           color={AppConfig.textMain}
+           style={styles.thumbnail}
+           />;
+        }
+
+        if (member.workPost && member.workPost.post_name) {
+          workpost =
+          <Text style={styles.list_row_subtitle}>
+            {member.workPost.post_name}
+          </Text>;
+        }
+          return (
+            <TouchableOpacity style={styles.list_row}>
+            {avatar}
+              <View style={{flex: 1}}>
+                <Text style={styles.list_row_title}>
+                  {member.formatted_name}
+                </Text>
+                {workpost}
+              </View>
+            </TouchableOpacity>
+          );
+        },
     renderResults: function() {
 
         return (
-          <View style={[AppStyles.container]}>
+          <ScrollView style={[AppStyles.container, {marginBottom: 50}]}>
               <View style={styles.container}>
                 <Text style={[styles.header]}>
                   {this.state.project.name}
@@ -157,7 +199,7 @@
             <View>
               <Text style={styles.title}>Сводка</Text>
                 <TouchableOpacity
-                  style={styles.list_row}
+                  style={[styles.list_row, {backgroundColor: (this.state.showTargets ? '#f9f9f9' : '#FFF')}]}
                   onPress={() => {
                     this.setState({showTargets: !this.state.showTargets});
                   }}>
@@ -178,7 +220,10 @@
                   />
                 </Collapsible>
                 <TouchableOpacity
-                  style={styles.list_row}>
+                  style={[styles.list_row, {backgroundColor: (this.state.showMembers ? '#f9f9f9' : '#FFF')}]}
+                  onPress={() => {
+                    this.setState({showMembers: !this.state.showMembers});
+                  }}>
                   <Icon
                    name='fontawesome|user'
                    size={20}
@@ -189,8 +234,14 @@
                     Участники: { this.state.members.length }
                   </Text>
                 </TouchableOpacity>
+                <Collapsible collapsed={!this.state.showMembers}>
+                  <ListView
+                  dataSource={this.state.membersDataSource}
+                  renderRow={this.renderMember}
+                  />
+                </Collapsible>
             </View>
-          </View>
+          </ScrollView>
         );
       }
 
@@ -233,7 +284,6 @@
       color: '#777',
     },
     list_row_title: {
-      fontSize: 12,
       color:  AppConfig.textMain,
     },
     list_row_subtitle: {
@@ -254,6 +304,12 @@
     target_date: {
       color:  AppConfig.textMain,
       fontSize: 10,
+    },
+    thumbnail: {
+      width: 30,
+      height: 30,
+      marginRight: 10,
+      borderRadius: 15,
     },
   });
 
