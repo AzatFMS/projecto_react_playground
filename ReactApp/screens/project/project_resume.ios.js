@@ -225,7 +225,7 @@
                     this.setState({showMembers: !this.state.showMembers});
                   }}>
                   <Icon
-                   name='fontawesome|user'
+                   name='fontawesome|users'
                    size={20}
                    color='#777'
                    style={styles.icon}
