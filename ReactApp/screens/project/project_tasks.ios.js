@@ -174,10 +174,12 @@
       },
     renderResults: function() {
         return (
+          <View style={styles.container}>
             <ListView
             dataSource={this.state.tasksDataSource}
             renderRow={this.renderTask}
             />
+          </View>
         );
       }
 

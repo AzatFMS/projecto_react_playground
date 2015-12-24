@@ -143,10 +143,10 @@
   },
   renderResults: function() {
       return (
-          <ListView
-          dataSource={this.state.projectsDataSource}
-          renderRow={this.renderProject}
-          />
+            <ListView
+            dataSource={this.state.projectsDataSource}
+            renderRow={this.renderProject}
+            />
       );
     }
 
