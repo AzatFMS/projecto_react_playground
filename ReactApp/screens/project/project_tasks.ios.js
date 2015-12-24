@@ -174,12 +174,10 @@
       },
     renderResults: function() {
         return (
-          <ScrollView style={styles.container}>
             <ListView
             dataSource={this.state.tasksDataSource}
             renderRow={this.renderTask}
             />
-          </ScrollView>
         );
       }
 

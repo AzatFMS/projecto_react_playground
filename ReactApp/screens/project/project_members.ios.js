@@ -47,6 +47,7 @@
           membersDataSource: new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
           }),
+          project: this.props.route.project,
         };
     },
 
@@ -55,17 +56,23 @@
     },
 
     fetchMembers: function() {
-       fetch(Util.buildUrl('/projects/members/' + this.props.route.project.id ))
+       fetch(Util.buildUrl('/projects/members/' + this.state.project.id ))
       .then(response => response.json())
       .then(jsonData => {
-
+            var _self = this;
             jsonData
             .sort(function(a, b) {
-                return parseInt(b.time_end) - parseInt(a.time_end);
-            })
-            .sort(function(a, b) {
-                return parseInt(b.priority_id) - parseInt(a.priority_id);
+              if (a.id == _self.state.project.uid) {
+                return -1;
+              }
+              if (b.id == _self.state.project.uid) {
+                return 1;
+              }
+              if(a.formatted_name < b.formatted_name) return -1;
+              if(a.formatted_name > b.formatted_name) return 1;
+              return 0;
             });
+
             this.setState({
                isLoading: false,
                members: jsonData,
@@ -124,12 +131,14 @@
           {member.workPost.post_name}
         </Text>;
       }
+
+
         return (
           <TouchableOpacity style={styles.list_row}>
-          {avatar}
+            {avatar}
             <View style={{flex: 1}}>
               <Text style={styles.list_row_title}>
-                {member.formatted_name}
+                {member.formatted_name} {member.id == this.state.project.uid ? '(Автор)' : ''}
               </Text>
               {workpost}
             </View>
@@ -138,12 +147,10 @@
       },
     renderResults: function() {
         return (
-          <ScrollView style={styles.container}>
-          <ListView
-          dataSource={this.state.membersDataSource}
-          renderRow={this.renderMember}
-          />
-          </ScrollView>
+            <ListView
+            dataSource={this.state.membersDataSource}
+            renderRow={this.renderMember}
+            />
         );
       }
 
@@ -155,7 +162,6 @@
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginBottom: 50,
     },
     list_row: {
       flex: 1,

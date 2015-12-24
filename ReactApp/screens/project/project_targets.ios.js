@@ -117,12 +117,10 @@
       },
     renderResults: function() {
         return (
-          <ScrollView style={styles.container}>
           <ListView
           dataSource={this.state.targetsDataSource}
           renderRow={this.renderTarget}
           />
-          </ScrollView>
         );
       }
 
@@ -134,7 +132,6 @@
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginBottom: 50,
     },
     list_row: {
       flex: 1,
