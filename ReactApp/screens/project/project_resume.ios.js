@@ -19,6 +19,8 @@
   var {Icon,} = require('react-native-icons');
 
   var Collapsible = require('react-native-collapsible');
+  var ProjectTargets = require('./project_targets.ios');
+  var ProjectMembers = require('./project_members.ios');
 
   var Util = require('../../util.ios');
 
@@ -125,60 +127,22 @@
         };
         return statuses[status] ? statuses[status] : '';
     },
-    renderTarget: function(target) {
 
-        return (
-          <View style={styles.list_row}>
-            <View style={{flex: 1}}>
-              <Text style={styles.list_row_title}>
-                {target.name}
-              </Text>
-              <Text style={styles.list_row_subtitle}>
-                {Util.targetsHelper.getStatusName(target.object_status)}
-              </Text>
-            </View>
-            <View style={styles.right_block}>
-              <Text style={styles.target_date}>{target.formattedObjectTime}</Text>
-            </View>
-          </View>
-        );
-      },
-      renderMember: function(member) {
-
-        var avatar, workpost;
-        if (member.profileData && member.profileData.avatar) {
-          avatar = <Image
-            style={styles.thumbnail}
-            source={{uri: 'http://opt.organizer2016.ru/' + member.profileData.avatar}}
-            />;
-        } else {
-          avatar = <Icon
-           name={'fontawesome|user'}
-           size={30}
-           color={AppConfig.textMain}
-           style={styles.thumbnail}
-           />;
-        }
-
-        if (member.workPost && member.workPost.post_name) {
-          workpost =
-          <Text style={styles.list_row_subtitle}>
-            {member.workPost.post_name}
-          </Text>;
-        }
-          return (
-            <TouchableOpacity style={styles.list_row}>
-            {avatar}
-              <View style={{flex: 1}}>
-                <Text style={styles.list_row_title}>
-                  {member.formatted_name}
-                </Text>
-                {workpost}
-              </View>
-            </TouchableOpacity>
-          );
-        },
     renderResults: function() {
+
+        var memebers_right_btn, targets_right_btn;
+        if (this.state.targets.length) {
+          targets_right_btn = <View
+            style={styles.right_btn}>
+            <Text style={styles.right_btn_arrow}>></Text>
+          </View>;
+        }
+        if (this.state.members.length) {
+          memebers_right_btn = <View
+            style={styles.right_btn}>
+            <Text style={styles.right_btn_arrow}>></Text>
+          </View>;
+        }
 
         return (
           <ScrollView style={[AppStyles.container, {marginBottom: 50}]}>
@@ -199,47 +163,55 @@
             <View>
               <Text style={styles.title}>Сводка</Text>
                 <TouchableOpacity
-                  style={[styles.list_row, {backgroundColor: (this.state.showTargets ? '#f9f9f9' : '#FFF')}]}
+                  style={[styles.list_row]}
                   onPress={() => {
-                    this.setState({showTargets: !this.state.showTargets});
+                    if (this.state.targets.length) {
+                      this.props.navigator.push({
+                        title: "Цели проекта",
+                        component: ProjectTargets,
+                        project: this.state.project,
+                        index: 1
+                      });
+                    }
                   }}>
-                  <Icon
-                   name='fontawesome|flag-checkered'
-                   size={20}
-                   color='#777'
-                   style={styles.icon}
-                   />
-                  <Text style={styles.list_row_text}>
-                    Цели: { this.state.targets.length }
-                  </Text>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                      <Icon
+                       name='fontawesome|flag-checkered'
+                       size={20}
+                       color='#777'
+                       style={styles.icon}
+                       />
+                      <Text style={styles.list_row_text}>
+                        Цели: { this.state.targets.length }
+                      </Text>
+                  </View>
+                  { targets_right_btn }
                 </TouchableOpacity>
-                <Collapsible collapsed={!this.state.showTargets}>
-                  <ListView
-                  dataSource={this.state.targetsDataSource}
-                  renderRow={this.renderTarget}
-                  />
-                </Collapsible>
                 <TouchableOpacity
-                  style={[styles.list_row, {backgroundColor: (this.state.showMembers ? '#f9f9f9' : '#FFF')}]}
+                  style={[styles.list_row]}
                   onPress={() => {
-                    this.setState({showMembers: !this.state.showMembers});
+                    if (this.state.members.length) {
+                      this.props.navigator.push({
+                        title: "Участники проекта",
+                        component: ProjectMembers,
+                        project: this.state.project,
+                        index: 1
+                      });
+                    }
                   }}>
-                  <Icon
-                   name='fontawesome|users'
-                   size={20}
-                   color='#777'
-                   style={styles.icon}
-                   />
-                  <Text style={styles.list_row_text}>
-                    Участники: { this.state.members.length }
-                  </Text>
+                  <View style={{flex: 1, flexDirection: 'row'}}>
+                    <Icon
+                     name='fontawesome|users'
+                     size={20}
+                     color='#777'
+                     style={styles.icon}
+                     />
+                    <Text style={styles.list_row_text}>
+                      Участники: { this.state.members.length }
+                    </Text>
+                  </View>
+                  { memebers_right_btn }
                 </TouchableOpacity>
-                <Collapsible collapsed={!this.state.showMembers}>
-                  <ListView
-                  dataSource={this.state.membersDataSource}
-                  renderRow={this.renderMember}
-                  />
-                </Collapsible>
             </View>
           </ScrollView>
         );
@@ -305,11 +277,15 @@
       color:  AppConfig.textMain,
       fontSize: 10,
     },
-    thumbnail: {
-      width: 30,
-      height: 30,
-      marginRight: 10,
-      borderRadius: 15,
+    right_btn: {
+      width: 24,
+      height: 24,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    right_btn_arrow: {
+      color:  AppConfig.textMain,
+      fontSize: 24,
     },
   });
 
