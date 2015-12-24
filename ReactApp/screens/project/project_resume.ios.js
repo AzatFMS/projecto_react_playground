@@ -18,6 +18,7 @@
 
   var {Icon,} = require('react-native-icons');
 
+  var Collapsible = require('react-native-collapsible');
 
   var Util = require('../../util.ios');
 
@@ -29,6 +30,8 @@
     Component,
     ActivityIndicatorIOS,
     TouchableOpacity,
+    Modal,
+    ListView,
   } = React;
 
 /* ==============================
@@ -42,6 +45,10 @@
           project: {},
           targets: [],
           members: [],
+          targetsDataSource: new ListView.DataSource({
+            rowHasChanged: (row1, row2) => row1 !== row2,
+          }),
+          showTargets: false,
         };
     },
 
@@ -64,11 +71,12 @@
       .catch(error => console.dir(error));
     },
     fetchTargets: function() {
-       fetch(Util.buildUrl('/projects/targets/' + this.props.project.id))
+       fetch(Util.buildUrl('/projects/objects/' + this.props.project.id))
       .then(response => response.json())
       .then(jsonData => {
             this.setState({
                targets: jsonData,
+               targetsDataSource: this.state.targetsDataSource.cloneWithRows(jsonData),
             });
           })
       .catch(error => console.dir(error));
@@ -110,28 +118,49 @@
         };
         return statuses[status] ? statuses[status] : '';
     },
-    renderResults: function() {
-        var obsrvers = [];
+    renderTarget: function(target) {
+
         return (
-          <View style={[AppStyles.container]}>
-            <View style={styles.container}>
-              <Text style={[styles.header]}>
-                {this.state.project.name}
+          <View style={styles.list_row}>
+            <View style={{flex: 1}}>
+              <Text style={styles.list_row_title}>
+                {target.name}
               </Text>
-              <Text style={[styles.text]}>
-                {this.getStatusName(this.state.project.project_status)}
-              </Text>
-              <Text style={[styles.text]}>
-                Автор: {this.state.project.user.formatted_name}
-              </Text>
-              <Text style={[styles.text]}>
-                {this.state.project.description}
+              <Text style={styles.list_row_subtitle}>
+                {Util.targetsHelper.getStatusName(target.object_status)}
               </Text>
             </View>
+            <View style={styles.right_block}>
+              <Text style={styles.target_date}>{target.formattedObjectTime}</Text>
+            </View>
+          </View>
+        );
+      },
+    renderResults: function() {
+
+        return (
+          <View style={[AppStyles.container]}>
+              <View style={styles.container}>
+                <Text style={[styles.header]}>
+                  {this.state.project.name}
+                </Text>
+                <Text style={[styles.text]}>
+                  {this.getStatusName(this.state.project.project_status)}
+                </Text>
+                <Text style={[styles.text]}>
+                  Автор: {this.state.project.user.formatted_name}
+                </Text>
+                <Text style={[styles.text]}>
+                  {this.state.project.description}
+                </Text>
+              </View>
             <View>
               <Text style={styles.title}>Сводка</Text>
                 <TouchableOpacity
-                  style={styles.list_row}>
+                  style={styles.list_row}
+                  onPress={() => {
+                    this.setState({showTargets: !this.state.showTargets});
+                  }}>
                   <Icon
                    name='fontawesome|flag-checkered'
                    size={20}
@@ -142,6 +171,12 @@
                     Цели: { this.state.targets.length }
                   </Text>
                 </TouchableOpacity>
+                <Collapsible collapsed={!this.state.showTargets}>
+                  <ListView
+                  dataSource={this.state.targetsDataSource}
+                  renderRow={this.renderTarget}
+                  />
+                </Collapsible>
                 <TouchableOpacity
                   style={styles.list_row}>
                   <Icon
@@ -167,6 +202,8 @@
   var styles = StyleSheet.create({
     container: {
       padding: 10,
+      justifyContent: 'center',
+      padding: 20,
     },
     header: {
       fontWeight: 'bold',
@@ -195,11 +232,29 @@
     list_row_text: {
       color: '#777',
     },
+    list_row_title: {
+      fontSize: 12,
+      color:  AppConfig.textMain,
+    },
+    list_row_subtitle: {
+      fontSize: 10,
+      color:  AppConfig.textMain,
+    },
     icon: {
       width: 20,
       height: 20,
       marginRight: 10,
-    }
+    },
+    right_block: {
+      width: 60,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    target_date: {
+      color:  AppConfig.textMain,
+      fontSize: 10,
+    },
   });
 
 /* ==============================

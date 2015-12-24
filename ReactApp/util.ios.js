@@ -84,7 +84,17 @@ var UTIL = {
       }
       return label;
 		}
-	}
+	},
+	targetsHelper: {
+			getStatusName: function(status) {
+				var statuses = {
+						0: 'В процессе',
+					 	1: 'Достигнута',
+					 	2: 'Провалена',
+				};
+				return statuses[status];
+			}
+	},
 };
 
 /* ==============================
