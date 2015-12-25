@@ -18,6 +18,14 @@
   var AppConfig = require('../../config.ios');
 
   var Util = require('../../util.ios');
+  var ListSeparator = require('../../components/list_separator.ios');
+  var Loader = require('../../components/loader.ios');
+  var NoItems = require('../../components/no_items.ios');
+  var ListLoader = require('../../components/list_loader.ios');
+  var ListWillRefresh = require('../../components/list_will_refresh.ios');
+  var ListRefreshIdle = require('../../components/list_refresh_idle.ios');
+
+  var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');
@@ -67,6 +75,8 @@
                targets: jsonData,
                targetsDataSource: this.state.targetsDataSource.cloneWithRows(jsonData)
             });
+            this.list.hideHeader();
+            this.list.hideFooter();
           })
       .catch(error => console.dir(error));
     },
@@ -81,31 +91,26 @@
     },
     renderLoadingMessage: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <ActivityIndicatorIOS
-              style={[styles.centering, {height: 80}]}
-              size="large"
-              color="#777"
-            />
-          </View>
+          <Loader/>
         );
     },
     renderNoTargets: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <Text style={AppStyles.baseText}>Нет задач</Text>
-          </View>
+          <NoItems text="Нет целей"/>
         );
+    },
+    refreshTargets: function() {
+      this.fetchTargets();
     },
     renderTarget: function(target) {
 
         return (
-          <View style={styles.list_row}>
-            <View style={{flex: 1}}>
-              <Text style={styles.list_row_title}>
+          <View style={AppStyles.list_row}>
+            <View style={AppStyles.list_row_main}>
+              <Text style={AppStyles.list_row_title}>
                 {target.name}
               </Text>
-              <Text style={styles.list_row_subtitle}>
+              <Text style={AppStyles.list_row_subtitle}>
                 {Util.targetsHelper.getStatusName(target.object_status)}
               </Text>
             </View>
@@ -117,10 +122,22 @@
       },
     renderResults: function() {
         return (
-          <ListView
-          dataSource={this.state.targetsDataSource}
-          renderRow={this.renderTarget}
-          />
+          <View style={styles.container}>
+            <RefreshInfiniteListView
+            ref = {(list) => {this.list = list}}
+            dataSource={this.state.targetsDataSource}
+            onRefresh={this.refreshTargets}
+            onInfinite={this.refreshTargets}
+            renderHeaderRefreshIdle={()=> {return (<ListRefreshIdle/>)}}
+            renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
+            renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
+            renderFooterWillInifite={()=> {return (<ListWillRefresh/>)}}
+            renderFooterInifiteIdle={()=> {return (<ListRefreshIdle reverse={true}/>)}}
+            renderFooterInifiting={()=> {return (<ListLoader/>)}}
+            renderRow={this.renderTarget}
+            renderSeparator={()=> {return (<ListSeparator/>)}}
+            />
+          </View>
         );
       }
 
@@ -132,21 +149,6 @@
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-    },
-    list_row: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: AppConfig.subtleGreyBorder,
-    },
-    list_row_title: {
-      fontWeight: 'bold',
-      color:  AppConfig.textMain,
-    },
-    list_row_subtitle: {
-      color:  AppConfig.textMain,
     },
     left_block: {
       marginRight: 10,
@@ -186,7 +188,7 @@
       justifyContent: 'center',
     },
     target_date: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
       fontSize: 10,
     },
   });

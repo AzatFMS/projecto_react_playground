@@ -285,6 +285,7 @@
       color:  AppConfig.textMain,
     },
     list_row_subtitle: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
+      fontSize: 12,
     },
   });

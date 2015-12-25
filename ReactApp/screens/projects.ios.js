@@ -181,7 +181,7 @@
       justifyContent: 'center',
     },
     right_btn_arrow: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textIcon,
       fontSize: 30,
     },
   });

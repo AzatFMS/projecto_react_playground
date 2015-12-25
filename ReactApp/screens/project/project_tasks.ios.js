@@ -141,7 +141,7 @@
             <Icon
                name={'fontawesome|user-secret'}
                size={14}
-               color={AppConfig.textMain}
+               color={AppConfig.textIcon}
                style={styles.private_icon}
                />;
           }
@@ -151,7 +151,7 @@
             <Icon
                name={'fontawesome|clone'}
                size={14}
-               color={AppConfig.textMain}
+               color={AppConfig.textIcon}
                style={styles.repeat_icon}
                />;
           }
@@ -249,15 +249,15 @@
       justifyContent: 'center',
     },
     task_date: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
       fontSize: 10,
     },
     task_time: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
       fontSize: 16,
     },
     without_time_end: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
       fontSize: 10,
     },
   });

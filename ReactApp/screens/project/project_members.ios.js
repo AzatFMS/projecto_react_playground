@@ -21,6 +21,14 @@
   var Loader = require('../../components/loader.ios');
 
   var Util = require('../../util.ios');
+  var ListSeparator = require('../../components/list_separator.ios');
+  var Loader = require('../../components/loader.ios');
+  var NoItems = require('../../components/no_items.ios');
+  var ListLoader = require('../../components/list_loader.ios');
+  var ListWillRefresh = require('../../components/list_will_refresh.ios');
+  var ListRefreshIdle = require('../../components/list_refresh_idle.ios');
+
+  var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');
@@ -81,6 +89,8 @@
                members: jsonData,
                membersDataSource: this.state.membersDataSource.cloneWithRows(jsonData)
             });
+            this.list.hideHeader();
+            this.list.hideFooter();
           })
       .catch(error => console.dir(error));
     },
@@ -93,22 +103,17 @@
         return this.renderResults();
       }
     },
+    refreshMembers: function() {
+      this.fetchMembers();
+    },
     renderLoadingMessage: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <ActivityIndicatorIOS
-              style={[styles.centering, {height: 80}]}
-              size="large"
-              color="#777"
-            />
-          </View>
+          <Loader/>
         );
     },
     renderNoMembers: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <Text style={AppStyles.baseText}>Нет задач</Text>
-          </View>
+          <NoItems text="Нет участников"/>
         );
     },
     renderMember: function(member) {
@@ -130,17 +135,17 @@
 
       if (member.workPost && member.workPost.post_name) {
         workpost =
-        <Text style={styles.list_row_subtitle}>
+        <Text style={AppStyles.list_row_subtitle}>
           {member.workPost.post_name}
         </Text>;
       }
 
 
         return (
-          <TouchableOpacity style={styles.list_row}>
+          <TouchableOpacity style={AppStyles.list_row}>
             {avatar}
-            <View style={{flex: 1}}>
-              <Text style={styles.list_row_title}>
+            <View style={AppStyles.list_row_main}>
+              <Text style={AppStyles.list_row_title}>
                 {member.formatted_name} {member.id == this.state.project.uid ? '(Автор)' : ''}
               </Text>
               {workpost}
@@ -150,10 +155,22 @@
       },
     renderResults: function() {
         return (
-            <ListView
+          <View style={styles.container}>
+            <RefreshInfiniteListView
+            ref = {(list) => {this.list = list}}
             dataSource={this.state.membersDataSource}
+            onRefresh={this.refreshMembers}
+            onInfinite={this.refreshMembers}
+            renderHeaderRefreshIdle={()=> {return (<ListRefreshIdle/>)}}
+            renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
+            renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
+            renderFooterWillInifite={()=> {return (<ListWillRefresh/>)}}
+            renderFooterInifiteIdle={()=> {return (<ListRefreshIdle reverse={true}/>)}}
+            renderFooterInifiting={()=> {return (<ListLoader/>)}}
             renderRow={this.renderMember}
+            renderSeparator={()=> {return (<ListSeparator/>)}}
             />
+          </View>
         );
       }
 
@@ -165,21 +182,6 @@
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-    },
-    list_row: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: AppConfig.subtleGreyBorder,
-    },
-    list_row_title: {
-      fontWeight: 'bold',
-      color:  AppConfig.textMain,
-    },
-    list_row_subtitle: {
-      color:  AppConfig.textMain,
     },
     left_block: {
       marginRight: 10,

@@ -32,7 +32,7 @@
         <ActivityIndicatorIOS
           style={[styles.centering, {height: 80}]}
           size="large"
-          color="{AppConfig.textMain}"
+          color={AppConfig.textIcon}
         />
       </View>
       );

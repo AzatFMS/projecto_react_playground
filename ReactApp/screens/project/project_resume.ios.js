@@ -154,7 +154,7 @@
                       <Icon
                        name='fontawesome|flag-checkered'
                        size={20}
-                       color='#777'
+                       color={AppConfig.textIcon}
                        style={styles.icon}
                        />
                       <Text style={styles.list_row_text}>
@@ -180,7 +180,7 @@
                     <Icon
                      name='fontawesome|users'
                      size={20}
-                     color='#777'
+                     color={AppConfig.textIcon}
                      style={styles.icon}
                      />
                     <Text style={styles.list_row_text}>
@@ -260,7 +260,7 @@
       justifyContent: 'center',
     },
     right_btn_arrow: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textIcon,
       fontSize: 24,
     },
   });

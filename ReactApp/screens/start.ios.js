@@ -96,7 +96,7 @@ var ANIMATE_TIME = 1000;
                 <Icon
                    name={'fontawesome|hand-o-left'}
                    size={20}
-                   color={AppConfig.textMain}
+                   color={AppConfig.textIcon}
                    style={styles.iconHand}
                    />
                 <Text onPress={this.navigate} style={styles.navigate}>

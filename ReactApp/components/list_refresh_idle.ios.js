@@ -34,7 +34,7 @@
       icon =   <Icon
          name='fontawesome|arrow-up'
          size={30}
-         color={AppConfig.textMain}
+         color={AppConfig.textIcon}
          style={{
            width: 30,
            height: 30,
@@ -44,7 +44,7 @@
       icon =   <Icon
          name='fontawesome|arrow-down'
          size={30}
-         color={AppConfig.textMain}
+         color={AppConfig.textIcon}
          style={{
            width: 30,
            height: 30,

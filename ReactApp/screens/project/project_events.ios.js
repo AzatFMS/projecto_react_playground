@@ -127,7 +127,7 @@
                 {event.name}
               </Text>
               <Text style={AppStyles.list_row_subtitle}>
-                {event.user ? event.user.formatted_name : ''}
+                {event.user ? event.user.formatted_name : ''}{ event.users_data.length ? ' + ' + event.users_data.length : ''}
               </Text>
             </View>
             {period}
@@ -171,11 +171,11 @@
       justifyContent: 'center',
     },
     date: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
       fontSize: 12,
     },
     time: {
-      color:  AppConfig.textMain,
+      color:  AppConfig.textSecondary,
       fontSize: 10,
     },
   });

@@ -34,7 +34,7 @@
         <Icon
          name='fontawesome|refresh'
          size={30}
-         color={AppConfig.textMain}
+         color={AppConfig.textIcon}
          style={{
            width: 30,
            height: 30,

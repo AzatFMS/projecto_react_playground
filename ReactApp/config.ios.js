@@ -45,10 +45,11 @@
   exports.grid_threeQuarters = window.width * 0.75;
 
   // Fonts
-  exports.baseFont = 'Avenir';
+  //exports.baseFont = 'Avenir';
 
   // Colors
   exports.primaryColor = "#999";
-  exports.textMain = "#777";
-  exports.textSecondary = "#888";
+  exports.textMain = "#555";
+  exports.textSecondary = "#777";
+  exports.textIcon = "#777";
   exports.subtleGreyBorder = "#E7E7E7";
