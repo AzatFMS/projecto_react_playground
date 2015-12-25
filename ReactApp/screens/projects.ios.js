@@ -24,8 +24,8 @@
   var ListLoader = require('../components/list_loader.ios');
   var ListWillRefresh = require('../components/list_will_refresh.ios');
   var ListRefreshIdle = require('../components/list_refresh_idle.ios');
-
   var TimerMixin = require('react-timer-mixin');
+
   var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
   var {
@@ -43,8 +43,8 @@
   =============================== */
   var Projects = React.createClass({
     mixins: [TimerMixin],
-    getInitialState: function() {
 
+    getInitialState: function() {
       return {
           isLoading: true,
           projects: [],
@@ -126,6 +126,7 @@
              projects: jsonData,
              projectsDataSource: this.state.projectsDataSource.cloneWithRows(jsonData.filter((x) => x.parent == parent))
           });
+          this.list.hideHeader();
           this.list.hideFooter();
         })
       .catch(error => console.dir(error));
@@ -151,7 +152,7 @@
   renderResults: function() {
       return (
             <RefreshInfiniteListView
-              ref = {(list) => {this.list= list}}
+              ref = {(list) => {this.list = list}}
               dataSource={this.state.projectsDataSource}
               onRefresh={this.refreshProjects}
               onInfinite={this.refreshProjects}
