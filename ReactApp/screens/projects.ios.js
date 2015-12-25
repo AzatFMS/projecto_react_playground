@@ -152,6 +152,15 @@
     this.fetchResults();
   },
 
+  renderHeaderWillRefresh: function() {
+    return (
+      <View style={{justifyContent:'center', alignItems:'center'}}>
+          <Text style={AppConfig.textMain}>
+              Отпустите...
+          </Text>
+      </View>
+  )},
+
   renderResults: function() {
       return (
             <RefreshInfiniteListView
