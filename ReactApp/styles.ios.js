@@ -281,7 +281,7 @@
       flex: 1,
     },
     list_row_title: {
-      fontWeight: 'bold',
+      //fontWeight: '500',
       color:  AppConfig.textMain,
     },
     list_row_subtitle: {

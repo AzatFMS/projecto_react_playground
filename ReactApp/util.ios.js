@@ -65,6 +65,20 @@ var Util = {
 				};
 				return statuses[status] ? statuses[status] : '';
 		},
+		getIconByType: function(type) {
+        switch (type) {
+            case 1:
+                return 'fontawesome|folder-open';
+            case 2:
+                return 'fontawesome|share-alt';
+            case 3:
+                return 'fontawesome|briefcase';
+            case 4:
+                return 'fontawesome|user-secret';
+            default:
+                return 'fontawesome|briefcase';
+        }
+		},
 	},
 	//Задачи
 	taskHelper: {

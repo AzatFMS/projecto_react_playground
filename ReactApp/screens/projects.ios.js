@@ -28,6 +28,8 @@
 
   var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
+  var {Icon,} = require('react-native-icons');
+
   var {
     StyleSheet,
     View,
@@ -82,13 +84,23 @@
         return (
             <View style={AppStyles.list_row}>
                 <TouchableOpacity onPress={() => this.showProject(project)}
-                  style={AppStyles.list_row_main}>
-                  <Text style={AppStyles.list_row_title}>
-                    {project.name}
-                  </Text>
-                  <Text style={AppStyles.list_row_subtitle}>
-                    {Util.projectsHelper.getStatusName(project.project_status)}
-                  </Text>
+                  style={[styles.list_row_main,]}>
+                  <View style={styles.left_block}>
+                    <Icon
+                       name={Util.projectsHelper.getIconByType(project.type)}
+                       size={20}
+                       color={AppConfig.textIcon}
+                       style={styles.type_icon}
+                       />
+                  </View>
+                  <View style={{flex: 1}}>
+                    <Text style={AppStyles.list_row_title}>
+                      {project.name}
+                    </Text>
+                    <Text style={AppStyles.list_row_subtitle}>
+                      {Util.projectsHelper.getStatusName(project.project_status)}
+                    </Text>
+                  </View>
                 </TouchableOpacity>
                 { right_btn }
             </View>
@@ -174,6 +186,22 @@
   Styles
   =============================== */
   var styles = StyleSheet.create({
+    list_row_main: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    left_block: {
+      marginRight: 10,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    type_icon: {
+      width: 20,
+      height: 20,
+    },
     right_btn: {
       width: 40,
       height: 40,

@@ -49,7 +49,7 @@
 
   // Colors
   exports.primaryColor = "#999";
-  exports.textMain = "#555";
+  exports.textMain = "#333";
   exports.textSecondary = "#777";
   exports.textIcon = "#777";
   exports.subtleGreyBorder = "#E7E7E7";
