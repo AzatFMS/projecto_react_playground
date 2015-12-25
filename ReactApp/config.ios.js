@@ -22,6 +22,8 @@
   =============================== */
   exports.title = 'GlobalConfig';
 
+  exports.api_url = "http://opt.organizer2016.ru";
+
 /* ===============================
   Default Style Variables
   =============================== */

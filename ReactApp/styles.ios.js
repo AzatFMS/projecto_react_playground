@@ -271,4 +271,20 @@
       color: '#a94442',
       fontSize: 16,
     },
+    list_row: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 10,
+    },
+    list_row_main: {
+      flex: 1,
+    },
+    list_row_title: {
+      fontWeight: 'bold',
+      color:  AppConfig.textMain,
+    },
+    list_row_subtitle: {
+      color:  AppConfig.textMain,
+    },
   });

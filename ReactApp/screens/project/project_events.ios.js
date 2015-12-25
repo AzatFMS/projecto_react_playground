@@ -20,6 +20,8 @@
   var {Icon,} = require('react-native-icons');
 
   var Util = require('../../util.ios');
+  var ListSeparator = require('../../components/list_separator.ios');
+  var Loader = require('../../components/loader.ios');
 
 
   var {
@@ -72,13 +74,7 @@
     },
     renderLoadingMessage: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <ActivityIndicatorIOS
-              style={[styles.centering, {height: 80}]}
-              size="large"
-              color="#777"
-            />
-          </View>
+          <Loader/>
         );
     },
     renderResults: function() {

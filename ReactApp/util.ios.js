@@ -11,10 +11,12 @@ var React = require('react-native');
 
 var Store = require('./store');
 
+var AppConfig = require('./config.ios');
+
 var {
 } = React;
 
-var UTIL = {
+var Util = {
 	/**
 	  * Test if Obj is empty
 	  */
@@ -48,10 +50,23 @@ var UTIL = {
 	},
 	buildUrl: function(url) {
 		url = url.indexOf("?") != -1 ? url + '&' : url + '?';
-		var result  = 'http://opt.organizer2016.ru' + url + 'token_id=' + Store.getItem('token_id') + '&token=' + Store.getItem('token');
+		var result  = AppConfig.api_url + url + 'token_id=' + Store.getItem('token_id') + '&token=' + Store.getItem('token');
 		console.log(result);
 		return result;
 	},
+	//проекты
+	projectsHelper: {
+		getStatusName: function(status) {
+				var statuses = {
+					0: 'В процессе',
+					1: 'Завершён',
+					2: 'Запланирован',
+					3: 'На согласовании',
+				};
+				return statuses[status] ? statuses[status] : '';
+		},
+	},
+	//Задачи
 	taskHelper: {
 		getColorByStatus: function(status) {
 			switch(status) {
@@ -85,6 +100,7 @@ var UTIL = {
       return label;
 		}
 	},
+	//Цели
 	targetsHelper: {
 			getStatusName: function(status) {
 				var statuses = {
@@ -100,7 +116,7 @@ var UTIL = {
 /* ==============================
   Done!
   =============================== */
-  module.exports = UTIL;
+  module.exports = Util;
   module.exports.details = {
-    title: 'UTIL'
+    title: 'Util'
   };

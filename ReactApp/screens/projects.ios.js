@@ -17,10 +17,10 @@
   var AppConfig = require('../config.ios');
 
   var Project = require('./project/project.ios');
-
   var Util = require('../util.ios');
-
   var Store = require('../store');
+  var ListSeparator = require('../components/list_separator.ios');
+  var Loader = require('../components/loader.ios');
 
   var {
     StyleSheet,
@@ -74,14 +74,14 @@
           </TouchableOpacity>;
         }
         return (
-            <View style={styles.list_row}>
+            <View style={AppStyles.list_row}>
                 <TouchableOpacity onPress={() => this.showProject(project)}
-                  style={{flex: 1}}>
-                  <Text style={styles.list_row_title}>
+                  style={AppStyles.list_row_main}>
+                  <Text style={AppStyles.list_row_title}>
                     {project.name}
                   </Text>
-                  <Text style={styles.list_row_subtitle}>
-                    {this.getStatusName(project.project_status)}
+                  <Text style={AppStyles.list_row_subtitle}>
+                    {Util.projectsHelper.getStatusName(project.project_status)}
                   </Text>
                 </TouchableOpacity>
                 { right_btn }
@@ -103,16 +103,26 @@
   },
   fetchResults: function() {
     var parent = this.props.route.parentProject ? this.props.route.parentProject.id : 0;
-     fetch(Util.buildUrl('/projects/list/'))
-    .then(response => response.json())
-    .then(jsonData => {
+
+    if (Store.getItem('projects')) {
+      this.setState({
+         isLoading: false,
+         projects: Store.getItem('projects'),
+         projectsDataSource: this.state.projectsDataSource.cloneWithRows(Store.getItem('projects').filter((x) => x.parent == parent))
+      });
+    } else {
+       fetch(Util.buildUrl('/projects/list/'))
+      .then(response => response.json())
+      .then(jsonData => {
+          Store.setItem('projects', jsonData);
           this.setState({
              isLoading: false,
              projects: jsonData,
              projectsDataSource: this.state.projectsDataSource.cloneWithRows(jsonData.filter((x) => x.parent == parent))
           });
         })
-    .catch(error => console.dir(error));
+      .catch(error => console.dir(error));
+    }
   },
   render: function() {
     if (this.state.isLoading) {
@@ -123,29 +133,20 @@
   },
   renderLoadingMessage: function() {
     return (
-        <View style={[AppStyles.container, AppStyles.containerCentered]}>
-          <ActivityIndicatorIOS
-            style={[styles.centering, {height: 80}]}
-            size="large"
-            color="#777"
-          />
-        </View>
+        <Loader/>
       );
   },
-  getStatusName: function(status) {
-      var statuses = {
-        0: 'В процессе',
-        1: 'Завершён',
-        2: 'Запланирован',
-        3: 'На согласовании',
-      };
-      return statuses[status] ? statuses[status] : '';
+  renderSeparator: function() {
+    return (
+      <ListSeparator/>
+    );
   },
   renderResults: function() {
       return (
             <ListView
             dataSource={this.state.projectsDataSource}
             renderRow={this.renderProject}
+            renderSeparator={this.renderSeparator}
             />
       );
     }
@@ -156,21 +157,6 @@
   Styles
   =============================== */
   var styles = StyleSheet.create({
-    list_row: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: AppConfig.subtleGreyBorder,
-    },
-    list_row_title: {
-      fontWeight: 'bold',
-      color:  AppConfig.textMain,
-    },
-    list_row_subtitle: {
-      color:  AppConfig.textMain,
-    },
     right_btn: {
       width: 40,
       height: 40,

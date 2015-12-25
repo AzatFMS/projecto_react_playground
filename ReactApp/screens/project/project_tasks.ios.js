@@ -18,6 +18,10 @@
   var AppConfig = require('../../config.ios');
 
   var Util = require('../../util.ios');
+  var Util = require('../../util.ios');
+  var ListSeparator = require('../../components/list_separator.ios');
+  var Loader = require('../../components/loader.ios');
+  var NoItems = require('../../components/no_items.ios');
 
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');
@@ -84,20 +88,12 @@
     },
     renderLoadingMessage: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <ActivityIndicatorIOS
-              style={[styles.centering, {height: 80}]}
-              size="large"
-              color="#777"
-            />
-          </View>
+          <Loader/>
         );
     },
     renderNoTasks: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <Text style={AppStyles.baseText}>Нет задач</Text>
-          </View>
+          <NoItems text="Нет задач"/>
         );
     },
     renderTask: function(task) {
@@ -124,7 +120,7 @@
           <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
 
           if (task.liable) {
-            liable = <Text style={styles.list_row_subtitle}>
+            liable = <Text style={AppStyles.list_row_subtitle}>
               {task.liable.formatted_name}
             </Text>
           }
@@ -155,15 +151,15 @@
         }
 
         return (
-          <TouchableOpacity style={styles.list_row}>
+          <TouchableOpacity style={AppStyles.list_row}>
             <View style={styles.left_block}>
               {status_icon}
               {priority_icon}
               {private_icon}
               {repeat_icon}
             </View>
-            <View style={{flex: 1}}>
-              <Text style={styles.list_row_title}>
+            <View style={AppStyles.list_row_main}>
+              <Text style={AppStyles.list_row_title}>
                 {task.name}
               </Text>
               {liable}
@@ -172,12 +168,18 @@
           </TouchableOpacity>
         );
       },
+      renderSeparator: function() {
+        return (
+          <ListSeparator/>
+        );
+      },
     renderResults: function() {
         return (
           <View style={styles.container}>
             <ListView
             dataSource={this.state.tasksDataSource}
             renderRow={this.renderTask}
+            renderSeparator={this.renderSeparator}
             />
           </View>
         );
@@ -192,21 +194,6 @@
     container: {
       flex: 1,
       marginBottom: 50,
-    },
-    list_row: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: AppConfig.subtleGreyBorder,
-    },
-    list_row_title: {
-      fontWeight: 'bold',
-      color:  AppConfig.textMain,
-    },
-    list_row_subtitle: {
-      color:  AppConfig.textMain,
     },
     left_block: {
       marginRight: 10,

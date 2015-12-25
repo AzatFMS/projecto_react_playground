@@ -21,8 +21,9 @@
   var Collapsible = require('react-native-collapsible');
   var ProjectTargets = require('./project_targets.ios');
   var ProjectMembers = require('./project_members.ios');
-
   var Util = require('../../util.ios');
+  var ListSeparator = require('../../components/list_separator.ios');
+  var Loader = require('../../components/loader.ios');
 
 
   var {
@@ -49,14 +50,6 @@
           project: {},
           targets: [],
           members: [],
-          targetsDataSource: new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-          }),
-          showTargets: false,
-          membersDataSource: new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-          }),
-          showMemebrs: false,
         };
     },
 
@@ -84,7 +77,6 @@
       .then(jsonData => {
             this.setState({
                targets: jsonData,
-               targetsDataSource: this.state.targetsDataSource.cloneWithRows(jsonData),
             });
           })
       .catch(error => console.dir(error));
@@ -95,7 +87,6 @@
       .then(jsonData => {
             this.setState({
                members: jsonData,
-               membersDataSource: this.state.membersDataSource.cloneWithRows(jsonData),
             });
           })
       .catch(error => console.dir(error));
@@ -109,23 +100,8 @@
     },
     renderLoadingMessage: function() {
       return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <ActivityIndicatorIOS
-              style={[styles.centering, {height: 80}]}
-              size="large"
-              color="#777"
-            />
-          </View>
+          <Loader/>
         );
-    },
-    getStatusName: function(status) {
-        var statuses = {
-          0: 'В процессе',
-          1: 'Завершён',
-          2: 'Запланирован',
-          3: 'На согласовании',
-        };
-        return statuses[status] ? statuses[status] : '';
     },
 
     renderResults: function() {
@@ -151,7 +127,7 @@
                   {this.state.project.name}
                 </Text>
                 <Text style={[styles.text]}>
-                  {this.getStatusName(this.state.project.project_status)}
+                  {Util.projectsHelper.getStatusName(this.state.project.project_status)}
                 </Text>
                 <Text style={[styles.text]}>
                   Автор: {this.state.project.user.formatted_name}
@@ -187,6 +163,7 @@
                   </View>
                   { targets_right_btn }
                 </TouchableOpacity>
+                <ListSeparator/>
                 <TouchableOpacity
                   style={[styles.list_row]}
                   onPress={() => {
@@ -212,6 +189,7 @@
                   </View>
                   { memebers_right_btn }
                 </TouchableOpacity>
+                <ListSeparator/>
             </View>
           </ScrollView>
         );
@@ -231,10 +209,10 @@
     header: {
       fontWeight: 'bold',
       fontSize: 14,
-      color: '#777',
+      color: AppConfig.textMain,
     },
     text: {
-      color: '#777',
+      color: AppConfig.textMain,
     },
     title: {
       paddingTop: 5,
@@ -249,11 +227,9 @@
       flexDirection: 'row',
       alignItems: 'center',
       padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: AppConfig.subtleGreyBorder,
     },
     list_row_text: {
-      color: '#777',
+      color: AppConfig.textMain,
     },
     list_row_title: {
       color:  AppConfig.textMain,
