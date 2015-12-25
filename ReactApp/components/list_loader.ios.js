@@ -28,7 +28,7 @@
 
   render: function() {
     return (
-      <View style={{justifyContent:'center', alignItems:'center'}}>
+      <View style={{height: 50, justifyContent:'center', alignItems:'center'}}>
         <ActivityIndicatorIOS
           size="large"
           color="{AppConfig.textMain}"
