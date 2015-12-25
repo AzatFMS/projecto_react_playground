@@ -142,24 +142,10 @@
         <Loader/>
       );
   },
-  renderSeparator: function() {
-    return (
-      <ListSeparator/>
-    );
-  },
   refreshProjects: function() {
     Store.deleteItem('projects');
     this.fetchResults();
   },
-
-  renderHeaderWillRefresh: function() {
-    return (
-      <View style={{justifyContent:'center', alignItems:'center'}}>
-          <Text style={AppConfig.textMain}>
-              Отпустите...
-          </Text>
-      </View>
-  )},
 
   renderResults: function() {
       return (
@@ -171,8 +157,11 @@
               renderHeaderRefreshIdle={()=> {return (<ListWillRefresh/>)}}
               renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
               renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
+              renderFooterWillInifite={()=> {return (<ListWillRefresh/>)}}
+              renderFooterInifiteIdle={()=> {return (<ListWillRefresh/>)}}
+              renderFooterInifiting={()=> {return (<ListLoader/>)}}
               renderRow={this.renderProject}
-              renderSeparator={this.renderSeparator}
+              renderSeparator={()=> {return (<ListSeparator/>)}}
               />
       );
     }

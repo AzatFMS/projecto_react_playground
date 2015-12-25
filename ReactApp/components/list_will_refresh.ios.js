@@ -30,7 +30,7 @@
 
   render: function() {
     return (
-      <View style={{justifyContent:'center', alignItems:'center'}}>
+      <View style={{height: 50, justifyContent:'center', alignItems:'center'}}>
         <Icon
          name='fontawesome|refresh'
          size={30}
