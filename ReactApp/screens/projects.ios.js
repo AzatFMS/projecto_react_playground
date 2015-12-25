@@ -21,6 +21,11 @@
   var Store = require('../store');
   var ListSeparator = require('../components/list_separator.ios');
   var Loader = require('../components/loader.ios');
+  var ListLoader = require('../components/list_loader.ios');
+  var ListWillRefresh = require('../components/list_will_refresh.ios');
+
+  var TimerMixin = require('react-timer-mixin');
+  var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
   var {
     StyleSheet,
@@ -36,7 +41,7 @@
   View
   =============================== */
   var Projects = React.createClass({
-
+    mixins: [TimerMixin],
     getInitialState: function() {
 
       return {
@@ -120,6 +125,7 @@
              projects: jsonData,
              projectsDataSource: this.state.projectsDataSource.cloneWithRows(jsonData.filter((x) => x.parent == parent))
           });
+          this.list.hideFooter();
         })
       .catch(error => console.dir(error));
     }
@@ -141,13 +147,24 @@
       <ListSeparator/>
     );
   },
+  refreshProjects: function() {
+    Store.deleteItem('projects');
+    this.fetchResults();
+  },
+
   renderResults: function() {
       return (
-            <ListView
-            dataSource={this.state.projectsDataSource}
-            renderRow={this.renderProject}
-            renderSeparator={this.renderSeparator}
-            />
+            <RefreshInfiniteListView
+              ref = {(list) => {this.list= list}}
+              dataSource={this.state.projectsDataSource}
+              onRefresh={this.refreshProjects}
+              onInfinite={this.refreshProjects}
+              renderHeaderRefreshIdle={()=> {return (<ListWillRefresh/>)}}
+              renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
+              renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
+              renderRow={this.renderProject}
+              renderSeparator={this.renderSeparator}
+              />
       );
     }
 
