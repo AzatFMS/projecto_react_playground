@@ -23,6 +23,7 @@
   var Loader = require('../components/loader.ios');
   var ListLoader = require('../components/list_loader.ios');
   var ListWillRefresh = require('../components/list_will_refresh.ios');
+  var ListRefreshIdle = require('../components/list_refresh_idle.ios');
 
   var TimerMixin = require('react-timer-mixin');
   var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
@@ -154,11 +155,11 @@
               dataSource={this.state.projectsDataSource}
               onRefresh={this.refreshProjects}
               onInfinite={this.refreshProjects}
-              renderHeaderRefreshIdle={()=> {return (<ListWillRefresh/>)}}
+              renderHeaderRefreshIdle={()=> {return (<ListRefreshIdle/>)}}
               renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
               renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
               renderFooterWillInifite={()=> {return (<ListWillRefresh/>)}}
-              renderFooterInifiteIdle={()=> {return (<ListWillRefresh/>)}}
+              renderFooterInifiteIdle={()=> {return (<ListRefreshIdle reverse={true}/>)}}
               renderFooterInifiting={()=> {return (<ListLoader/>)}}
               renderRow={this.renderProject}
               renderSeparator={()=> {return (<ListSeparator/>)}}
