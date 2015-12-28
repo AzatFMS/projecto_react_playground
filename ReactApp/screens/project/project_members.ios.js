@@ -122,7 +122,7 @@
       if (member.profileData && member.profileData.avatar) {
         avatar = <Image
           style={styles.thumbnail}
-          source={{uri: api_url + '/' + member.profileData.avatar}}
+          source={{uri: AppConfig.api_url + '/' + member.profileData.avatar}}
           />;
       } else {
         avatar = <Icon
