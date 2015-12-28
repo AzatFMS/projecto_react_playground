@@ -161,11 +161,11 @@
     },
     date: {
       color:  AppConfig.textSecondary,
-      fontSize: 12,
+      fontSize: 10,
     },
     time: {
       color:  AppConfig.textSecondary,
-      fontSize: 10,
+      fontSize: 16,
     },
   });
 

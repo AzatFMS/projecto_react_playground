@@ -12,6 +12,7 @@
     "react-native-db-models": "^0.1.2",
     "react-native-i18n": "0.0.6",
     "react-native-icons": "^0.7.0",
+    "react-native-lightbox": "^0.5.0",
     "react-native-localization": "^0.1.11",
     "react-native-navbar": "^0.8.2",
     "react-native-refresh-infinite-listview": "^1.0.2",

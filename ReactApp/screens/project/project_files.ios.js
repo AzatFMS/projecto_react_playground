@@ -22,8 +22,18 @@
   /* Screens / Pages */
   var {Icon,} = require('react-native-icons');
 
+  var moment = require('moment');
+
   var Util = require('../../util.ios');
 
+  var ListSeparator = require('../../components/list_separator.ios');
+  var Loader = require('../../components/loader.ios');
+  var NoItems = require('../../components/no_items.ios');
+  var ListLoader = require('../../components/list_loader.ios');
+  var ListWillRefresh = require('../../components/list_will_refresh.ios');
+  var ListRefreshIdle = require('../../components/list_refresh_idle.ios');
+
+  var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
   var {
     StyleSheet,
@@ -33,64 +43,118 @@
     ActivityIndicatorIOS,
     TouchableOpacity,
     ListView,
+    AlertIOS,
+    Image,
   } = React;
+
+  var Lightbox = require('react-native-lightbox');
 
 /* ==============================
   View
   =============================== */
   var ProjectFiles = React.createClass({
 
-    getInitialState: function() {
-      return {
-          isLoading: true,
-          files: [],
-          filesDataSource: new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-          }),
-        };
-    },
 
-    componentDidMount: function() {
-      this.fetchFiles();
-    },
+        getInitialState: function() {
+          return {
+              isLoading: true,
+              files: [],
+              filesDataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+              }),
+            };
+        },
 
-    fetchFiles: function() {
-       fetch(Util.buildUrl('/projects/files/' + this.props.project.id))
-      .then(response => response.json())
-      .then(jsonData => {
-            this.setState({
-               isLoading: false,
-               files: jsonData,
-               filesDataSource: this.state.filesDataSource.cloneWithRows(jsonData)
-            });
-          })
-      .catch(error => console.dir(error));
-    },
-    render: function() {
-      if (this.state.isLoading) {
-        return this.renderLoadingMessage();
-      } else {
-        return this.renderResults();
-      }
-    },
-    renderLoadingMessage: function() {
-      return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <ActivityIndicatorIOS
-              style={[styles.centering, {height: 80}]}
-              size="large"
-              color="#777"
-            />
-          </View>
-        );
-    },
-    renderResults: function() {
-        return (
-          <View style={[AppStyles.container, AppStyles.containerCentered]}>
-            <Text style={[AppStyles.baseText, AppStyles.p]}>Файлы</Text>
-          </View>
-        );
-      }
+        componentDidMount: function() {
+          this.fetchFiles();
+        },
+
+        fetchFiles: function() {
+           fetch(Util.buildUrl('/projects/files/' + this.props.project.id))
+          .then(response => response.json())
+          .then(jsonData => {
+                jsonData.sort(function(a, b) {
+                      return  parseInt(b.time) - parseInt(a.time);
+                  });
+                this.setState({
+                   isLoading: false,
+                   files: jsonData,
+                   filesDataSource: this.state.filesDataSource.cloneWithRows(jsonData)
+                });
+                this.list.hideHeader();
+                this.list.hideFooter();
+              })
+          .catch(error => console.dir(error));
+        },
+        render: function() {
+          if (this.state.isLoading) {
+            return this.renderLoadingMessage();
+          } else if (!this.state.files.length) {
+            return this.renderNoFiles();
+          } else {
+            return this.renderResults();
+          }
+        },
+        renderLoadingMessage: function() {
+          return (
+              <Loader/>
+            );
+        },
+        renderNoFiles: function() {
+          return (
+              <NoItems text="Нет файлов"/>
+            );
+        },
+        refreshFiles: function() {
+          this.fetchFiles();
+        },
+        renderFile: function(file) {
+
+            return (
+              <TouchableOpacity style={AppStyles.list_row}
+                onPress={() => {
+
+                }}>
+                <View style={AppStyles.list_row_main}>
+                  <View style={styles.title_block}>
+                    <Text style={AppStyles.list_row_title}>
+                      {file.file_name}
+                    </Text>
+                    <Text style={styles.ext}>
+                      {file.ext}
+                    </Text>
+                  </View>
+                  <Text style={AppStyles.list_row_subtitle}>
+                    {file.user ? file.user.formatted_name : ''}
+                  </Text>
+                </View>
+                <View style={styles.right_block}>
+                  <Text style={styles.date}>{file.formattedTime}</Text>
+                  <Text style={styles.time}>{moment.unix(file.time).format("HH:mm")}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          },
+        renderResults: function() {
+            return (
+              <View style={styles.container}>
+                <RefreshInfiniteListView
+                ref = {(list) => {this.list = list}}
+                dataSource={this.state.filesDataSource}
+                onRefresh={this.refreshFiles}
+                onInfinite={this.refreshFiles}
+                renderHeaderRefreshIdle={()=> {return (<ListRefreshIdle/>)}}
+                renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
+                renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
+                renderFooterWillInifite={()=> {return (<ListWillRefresh/>)}}
+                renderFooterInifiteIdle={()=> {return (<ListRefreshIdle reverse={true}/>)}}
+                renderFooterInifiting={()=> {return (<ListLoader/>)}}
+                renderRow={this.renderFile}
+                renderSeparator={()=> {return (<ListSeparator/>)}}
+                />
+              </View>
+            );
+          }
 
   });
 
@@ -99,40 +163,34 @@
   =============================== */
   var styles = StyleSheet.create({
     container: {
-      padding: 10,
+      flex: 1,
+      marginBottom: 50,
     },
-    header: {
-      fontWeight: 'bold',
-      fontSize: 14,
-      color: '#777',
-    },
-    text: {
-      color: '#777',
-    },
-    title: {
-      paddingTop: 5,
-      paddingBottom: 5,
-      paddingLeft: 10,
-      backgroundColor: AppConfig.primaryColor,
-      color: '#FFF',
-      fontWeight: 'bold',
-    },
-    list_row: {
+    title_block: {
       flex: 1,
       flexDirection: 'row',
+    },
+    ext: {
+      backgroundColor: '#919191',
+      borderRadius: 3,
+      padding: 3,
+      marginLeft: 5,
+      fontSize: 12,
+      color: '#fff',
+    },
+    right_block: {
+      width: 80,
       alignItems: 'center',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: AppConfig.subtleGreyBorder,
+      justifyContent: 'center',
     },
-    list_row_text: {
-      color: '#777',
+    date: {
+      color:  AppConfig.textSecondary,
+      fontSize: 10,
     },
-    icon: {
-      width: 20,
-      height: 20,
-      marginRight: 10,
-    }
+    time: {
+      color:  AppConfig.textSecondary,
+      fontSize: 16,
+    },
   });
 
 /* ==============================

@@ -122,7 +122,7 @@
       if (member.profileData && member.profileData.avatar) {
         avatar = <Image
           style={styles.thumbnail}
-          source={{uri: 'http://opt.organizer2016.ru/' + member.profileData.avatar}}
+          source={{uri: api_url + '/' + member.profileData.avatar}}
           />;
       } else {
         avatar = <Icon
