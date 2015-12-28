@@ -104,7 +104,11 @@
     },
     renderEvent: function(event) {
 
-      var period;
+      var period, status_icon;
+
+      status_icon =
+      <View style={[styles.status_icon, {backgroundColor: Util.eventHelper.getColorByStatus(event.event_status)}]}></View>;
+
       if (event.formattedTimeStart == event.formattedTimeEnd) {
         period = <View style={styles.right_block}>
           <Text style={styles.date}>{event.formattedTimeEnd}</Text>
@@ -122,6 +126,9 @@
 
         return (
           <TouchableOpacity style={AppStyles.list_row}>
+            <View style={styles.left_block}>
+              {status_icon}
+            </View>
             <View style={AppStyles.list_row_main}>
               <Text style={AppStyles.list_row_title}>
                 {event.name}
@@ -177,6 +184,18 @@
     time: {
       color:  AppConfig.textSecondary,
       fontSize: 10,
+    },
+    left_block: {
+      marginRight: 10,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    status_icon: {
+      width: 14,
+      height: 14,
+      borderRadius: 7,
+      marginBottom: 5,
     },
   });
 

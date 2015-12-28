@@ -85,22 +85,16 @@ var Util = {
 		getColorByStatus: function(status) {
 			switch(status) {
                 case 0:
-                case '0':
                     return '#afafaf';
                 case 1:
-                case '1':
                     return '#f4d447';
                 case 2:
-                case '2':
                     return '#ec7014';
                 case 3:
-                case '3':
                     return '#4292c6';
                 case 4:
-                case '4':
                     return '#238b45';
                 case 5:
-                case '5':
                     return '#b30000';
                 default:
                     return '#cccccc';
@@ -125,6 +119,29 @@ var Util = {
 				return statuses[status];
 			}
 	},
+	//События
+	eventHelper: {
+		getColorByStatus: function(status) {
+			switch(status) {
+				case 0:
+					return '#225ea8';
+				case 1:
+					return '#fee090';
+				case 2:
+					return '#d73027';
+				case 4:
+					return '#4d4d4d';
+				case 6:
+					return '#225ea8';
+				case 7:
+					return '#88419d';
+				case 8:
+					return '#01665e';
+				default:
+					return '#cccccc';
+			}
+		}
+	}
 };
 
 /* ==============================

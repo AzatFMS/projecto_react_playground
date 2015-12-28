@@ -106,7 +106,7 @@
 
     renderResults: function() {
 
-        var memebers_right_btn, targets_right_btn;
+        var memebers_right_btn, targets_right_btn, description;
         if (this.state.targets.length) {
           targets_right_btn = <View
             style={styles.right_btn}>
@@ -118,6 +118,11 @@
             style={styles.right_btn}>
             <Text style={styles.right_btn_arrow}>></Text>
           </View>;
+        }
+        if (this.state.project.description) {
+          description = <Text style={[styles.text]}>
+            {this.state.project.description}
+          </Text>;
         }
 
         return (
@@ -132,9 +137,7 @@
                 <Text style={[styles.text]}>
                   Автор: {this.state.project.user.formatted_name}
                 </Text>
-                <Text style={[styles.text]}>
-                  {this.state.project.description}
-                </Text>
+                {description}
               </View>
             <View>
               <Text style={styles.title}>Сводка</Text>
