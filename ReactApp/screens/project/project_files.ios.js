@@ -115,17 +115,17 @@
                 onPress={() => {
 
                 }}>
-                <View style={AppStyles.list_row_main}>
-                  <View style={styles.title_block}>
-                    <Text style={AppStyles.list_row_title}>
-                      {file.file_name}
-                    </Text>
-                    <Text style={styles.ext}>
-                      {file.ext}
-                    </Text>
+                <View style={styles.left_block}>
+                  <View style={styles.ext}>
+                    <Text style={styles.ext_text}>{file.ext}</Text>
                   </View>
+                </View>
+                <View style={AppStyles.list_row_main}>
+                  <Text style={AppStyles.list_row_title}>
+                    {file.file_name}
+                  </Text>
                   <Text style={AppStyles.list_row_subtitle}>
-                    {file.user ? file.user.formatted_name : ''}
+                    {file.size}Мб {file.user ? file.user.formatted_name : ''}
                   </Text>
                 </View>
                 <View style={styles.right_block}>
@@ -170,13 +170,21 @@
       flex: 1,
       flexDirection: 'row',
     },
+    left_block: {
+      marginRight: 10,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     ext: {
       backgroundColor: '#919191',
       borderRadius: 3,
       padding: 3,
-      marginLeft: 5,
-      fontSize: 12,
+      marginRight: 5,
+    },
+    ext_text: {
       color: '#fff',
+      fontSize: 14,
     },
     right_block: {
       width: 80,
