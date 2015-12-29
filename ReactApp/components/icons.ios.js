@@ -17,6 +17,8 @@
   var AppStyles = require('../styles.ios');
   var AppConfig = require('../config.ios');
 
+  var {Icon,} = require('react-native-icons');
+
   var {
     View,
     Image,
@@ -31,10 +33,12 @@
     render() {
       return (
         <TouchableOpacity onPress={this.props.leftButtonPress}>
-          <Image
-            source={require('image!hamburger')}
-            style={AppStyles.navbar_button}
-          />
+          <Icon
+             name={'fontawesome|bars'}
+             size={25}
+             color='#fff'
+             style={AppStyles.navbar_button}
+             />
         </TouchableOpacity>
       );
     }
@@ -48,12 +52,30 @@
     render() {
       return (
         <TouchableOpacity onPress={this.props.leftButtonPress}>
-          <Image
-            source={require('image!back_button')}
-            style={AppStyles.navbar_button}
-          />
+        <Icon
+           name={'fontawesome|chevron-left'}
+           size={25}
+           color='#fff'
+           style={AppStyles.navbar_button}
+           />
         </TouchableOpacity>
       );
     }
   }
   exports.BackIcon = BackIcon;
+
+  class AddIcon extends React.Component {
+    render() {
+      return (
+        <TouchableOpacity onPress={this.props.addButtonPress}>
+          <Icon
+             name={'fontawesome|plus-square'}
+             size={25}
+             color='#fff'
+             style={AppStyles.navbar_button_right}
+             />
+        </TouchableOpacity>
+      );
+    }
+  }
+  exports.AddIcon = AddIcon;

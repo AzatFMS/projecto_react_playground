@@ -110,13 +110,23 @@
         if (this.state.targets.length) {
           targets_right_btn = <View
             style={styles.right_btn}>
-            <Text style={styles.right_btn_arrow}>></Text>
+            <Icon
+               name={'fontawesome|chevron-right'}
+               size={20}
+               color={AppConfig.textIcon}
+               style={styles.right_btn_arrow}
+               />
           </View>;
         }
         if (this.state.members.length) {
           memebers_right_btn = <View
             style={styles.right_btn}>
-            <Text style={styles.right_btn_arrow}>></Text>
+            <Icon
+               name={'fontawesome|chevron-right'}
+               size={20}
+               color={AppConfig.textIcon}
+               style={styles.right_btn_arrow}
+               />
           </View>;
         }
         if (this.state.project.description) {
@@ -263,8 +273,8 @@
       justifyContent: 'center',
     },
     right_btn_arrow: {
-      color:  AppConfig.textIcon,
-      fontSize: 24,
+      width: 20,
+      height: 20,
     },
   });
 

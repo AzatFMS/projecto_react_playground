@@ -255,11 +255,16 @@
 	    borderBottomColor: AppConfig.subtleGreyBorder,
 	  },
     navbar_button: {
-      width: 26,
-      height: 26,
+      width: 25,
+      height: 25,
       left: 20,
       top: 30,
-      tintColor: '#FFFFFF'
+    },
+    navbar_button_right: {
+      width: 25,
+      height: 25,
+      right: 20,
+      top: 30,
     },
     navbar_title: {
       color: '#FFFFFF',

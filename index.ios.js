@@ -34,6 +34,7 @@
 
   var UTIL = require('./ReactApp/util.ios');
 
+  var {Icon,} = require('react-native-icons');
 
   var {
     AppRegistry,
@@ -153,6 +154,19 @@
       this.refs.rootNavigator.pop();
     },
 
+    onAddButtonPress: function(navigator) {
+      AlertIOS.alert(
+        'Добавить',
+        null,
+        [
+          {text: 'Проект', onPress: () => {}},
+          {text: 'Задачу', onPress: () => {}},
+          {text: 'Событие', onPress: () => {}},
+          {text: 'Скрыть', onPress: () => {}},
+        ]
+      );
+    },
+
     /**
       * When Hamburger from NavBar is Clicked
       */
@@ -227,6 +241,7 @@
       // Icons
       var MenuIcon = Icons.MenuIcon;
       var BackIcon = Icons.BackIcon;
+      var AddIcon = Icons.AddIcon;
 
       // Navbar Setup
       if (navBar) {
@@ -242,11 +257,12 @@
         title = route.title;
       }
 
-      // Determine which Icon component - hamburger or back?
-      var customPrev = <MenuIcon leftButtonPress={this.onLeftButtonPress} />;
+      var customPrev =  <MenuIcon leftButtonPress={this.onLeftButtonPress} />;
       if (route.index > 0){
         var customPrev = <BackIcon leftButtonPress={this.onLeftBackButtonPress} />;
       }
+
+      var customNext =  <AddIcon addButtonPress={this.onAddButtonPress} />;
 
       // Done
       return (
@@ -255,6 +271,7 @@
             title={title}
             style={AppStyles.navbar}
             customPrev={customPrev}
+            customNext={customNext}
             customTitle={<CustomTitle title={title} />} />
 
           <Component navigator={navigator} route={route} />
