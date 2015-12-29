@@ -36,6 +36,7 @@
     separator: {
       borderBottomWidth: 1,
       borderBottomColor: AppConfig.subtleGreyBorder,
+      marginLeft: 10,
     }
   });
 

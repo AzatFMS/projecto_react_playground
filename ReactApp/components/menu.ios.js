@@ -24,6 +24,7 @@
   var ComingSoon = require('../screens/soon.ios');
   var FormExample = require('../modules/example/screens/forms.ios');
   var Calendars = require('../screens/calendars.ios');
+  var ListSeparator = require('./list_separator.ios');
 
   var Util = require('../util.ios');
 
@@ -111,19 +112,20 @@ var Menu = React.createClass({
     // Build the actual Menu Items
     for (var i=0; i < links.length; i++) {
       linksJsx.push(
-        <TouchableOpacity
-          style={[]}
-          onPress={this.goToScreen.bind(this, links[i][0], links[i][1])}>
-          <View style={styles.menuItem}>
-            <Icon
-             name={links[i][2]}
-             size={20}
-             color='#777'
-             style={styles.icon}
-             />
-            <Text style={[AppStyles.baseText, styles.menuItemText]}>{links[i][0]}</Text>
-          </View>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+           style={styles.menuItem}
+            onPress={this.goToScreen.bind(this, links[i][0], links[i][1])}>
+              <Icon
+               name={links[i][2]}
+               size={20}
+               color={AppConfig.textIcon}
+               style={styles.icon}
+               />
+              <Text style={[AppStyles.baseText, styles.menuItemText]}>{links[i][0]}</Text>
+          </TouchableOpacity>
+          <ListSeparator/>
+        </View>
       );
     }
 
@@ -153,6 +155,7 @@ var Menu = React.createClass({
             </View>
           </TouchableOpacity>
         </View>
+        <ListSeparator/>
         <View style={styles.menu}>
           {linksJsx}
         </View>
@@ -184,8 +187,6 @@ var Menu = React.createClass({
       flexDirection: 'row',
       alignItems: 'flex-start',
       padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: "#e2e4e5",
     },
     headerTitle: {
       flex: 1,
@@ -199,22 +200,19 @@ var Menu = React.createClass({
     },
     menu: {
       flex: 1,
-      paddingLeft: 10,
       paddingBottom: 20,
     },
     menuItem: {
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-      borderBottomWidth: 1,
-      borderBottomColor: "#e2e4e5",
       padding: 10,
     },
     menuItemText: {
-      fontSize: 20,
+      fontSize: 18,
       //fontWeight: 'bold',
       flex: 1,
-      color: "#7e7e7e"
+      color: AppConfig.textMain,
     },
     icon: {
       width: 20,
