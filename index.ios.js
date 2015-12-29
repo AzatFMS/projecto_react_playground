@@ -61,7 +61,7 @@
   class CustomTitle extends React.Component {
     render() {
       return (
-          <Text style={[AppStyles.baseText, AppStyles.navbar_title]}>{UTIL.cutString(this.props.title, 35)}</Text>
+          <Text style={[AppStyles.baseText, AppStyles.navbar_title]}>{UTIL.cutString(this.props.title, 28)}</Text>
       );
     }
   }

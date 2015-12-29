@@ -258,18 +258,18 @@
       width: 30,
       height: 30,
       marginLeft: 10,
-      marginTop: 25,
+      marginTop: 23,
     },
     navbar_button_right: {
       width: 30,
       height: 30,
       marginRight: 10,
-      marginTop: 25,
+      marginTop: 23,
     },
     navbar_title: {
       color: '#FFFFFF',
       bottom: 10,
-      fontSize: 14,
+      fontSize: 18,
       //writingDirection: 'ltr',
     },
     error: {
