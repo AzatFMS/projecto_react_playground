@@ -217,7 +217,7 @@
     container: {
       padding: 10,
       justifyContent: 'center',
-      padding: 20,
+      padding: 10,
     },
     header: {
       fontWeight: 'bold',
