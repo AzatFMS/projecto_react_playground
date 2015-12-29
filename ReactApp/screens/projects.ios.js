@@ -79,8 +79,8 @@
             onPress={() => this.showNestedProjects(project)}
             style={styles.right_btn}>
             <Icon
-               name={'fontawesome|chevron-right'}
-               size={20}
+               name={'ion|ios-arrow-forward'}
+               size={30}
                color={AppConfig.textIcon}
                style={styles.right_btn_arrow}
                />
@@ -214,8 +214,8 @@
       justifyContent: 'center',
     },
     right_btn_arrow: {
-      width: 20,
-      height: 20,
+      width: 30,
+      height: 30,
     },
   });
 

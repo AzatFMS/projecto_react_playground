@@ -34,8 +34,8 @@
       return (
         <TouchableOpacity onPress={this.props.leftButtonPress}>
           <Icon
-             name={'fontawesome|bars'}
-             size={25}
+             name={'ion|navicon'}
+             size={30}
              color='#fff'
              style={AppStyles.navbar_button}
              />
@@ -53,8 +53,8 @@
       return (
         <TouchableOpacity onPress={this.props.leftButtonPress}>
         <Icon
-           name={'fontawesome|chevron-left'}
-           size={25}
+           name={'ion|ios-arrow-back'}
+           size={30}
            color='#fff'
            style={AppStyles.navbar_button}
            />
@@ -69,8 +69,8 @@
       return (
         <TouchableOpacity onPress={this.props.addButtonPress}>
           <Icon
-             name={'fontawesome|plus-square'}
-             size={25}
+             name={'ion|ios-plus-outline'}
+             size={30}
              color='#fff'
              style={AppStyles.navbar_button_right}
              />

@@ -94,8 +94,8 @@ var ANIMATE_TIME = 1000;
                <Animated.View
                 style={[{left: this.state.posAnim}, styles.animated ]}>
                 <Icon
-                   name={'fontawesome|hand-o-left'}
-                   size={20}
+                   name={'ion|ios-arrow-thin-left'}
+                   size={30}
                    color={AppConfig.textIcon}
                    style={styles.iconHand}
                    />
@@ -124,8 +124,8 @@ var ANIMATE_TIME = 1000;
       marginBottom: 20,
     },
     iconHand: {
-      width: 20,
-      height: 20,
+      width: 30,
+      height: 30,
       marginRight: 10,
     },
     animated: {
