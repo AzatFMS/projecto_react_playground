@@ -32,12 +32,12 @@
     return (
       <View style={{height: 50, justifyContent:'center', alignItems:'center'}}>
         <Icon
-         name='fontawesome|refresh'
-         size={30}
+         name='ion|ios-refresh-outline'
+         size={40}
          color={AppConfig.textIcon}
          style={{
-           width: 30,
-           height: 30,
+           width: 40,
+           height: 40,
          }}
          />
       </View>

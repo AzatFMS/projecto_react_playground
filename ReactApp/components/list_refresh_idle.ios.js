@@ -32,22 +32,22 @@
     var icon;
     if (this.props.reverse) {
       icon =   <Icon
-         name='fontawesome|arrow-up'
-         size={30}
+         name='ion|ios-arrow-thin-up'
+         size={40}
          color={AppConfig.textIcon}
          style={{
-           width: 30,
-           height: 30,
+           width: 40,
+           height: 40,
          }}
          />;
     } else {
       icon =   <Icon
-         name='fontawesome|arrow-down'
-         size={30}
+         name='ion|ios-arrow-thin-down'
+         size={40}
          color={AppConfig.textIcon}
          style={{
-           width: 30,
-           height: 30,
+           width: 40,
+           height: 40,
          }}
          />;
     }
