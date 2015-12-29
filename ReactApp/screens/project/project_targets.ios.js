@@ -183,7 +183,6 @@
     },
     right_block: {
       width: 60,
-      height: 40,
       alignItems: 'center',
       justifyContent: 'center',
     },

@@ -155,7 +155,7 @@
       marginBottom: 50,
     },
     right_block: {
-      width: 80,
+      width: 60,
       alignItems: 'center',
       justifyContent: 'center',
     },

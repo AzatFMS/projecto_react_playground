@@ -53,3 +53,4 @@
   exports.textSecondary = "#777";
   exports.textIcon = "#777";
   exports.subtleGreyBorder = "#E7E7E7";
+  exports.textWarning = "#dd1f00";

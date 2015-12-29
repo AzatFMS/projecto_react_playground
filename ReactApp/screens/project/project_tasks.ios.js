@@ -115,15 +115,24 @@
         time_end;
         if (!task.not_available)
         {
-          time_end = task.time_end ?
-          <View style={styles.right_block}>
-            <Text style={styles.task_date}>{task.formattedTimeEnd}</Text>
-            <Text style={styles.task_time}>{moment.unix(task.time_end).format("HH:mm")}</Text>
-          </View>
-          :
-          <View style={styles.right_block}>
-            <Text style={styles.without_time_end}>Без срока</Text>
-          </View>;
+          if (task.overdueDays) {
+            time_end =
+            <View style={styles.right_block}>
+              <Text style={[styles.task_time, AppStyles.textWarning]}>{task.overdueDays}</Text>
+              <Text style={[styles.task_date, AppStyles.textWarning]}>дней назад</Text>
+            </View>;
+          } else if (task.time_end) {
+            time_end =
+            <View style={styles.right_block}>
+              <Text style={styles.task_date}>{task.formattedTimeEnd}</Text>
+              <Text style={styles.task_time}>{moment.unix(task.time_end).format("HH:mm")}</Text>
+            </View>;
+          } else {
+            time_end =
+            <View style={styles.right_block}>
+              <Text style={styles.without_time_end}>Без срока</Text>
+            </View>;
+          }
 
           status_icon =
           <View style={[styles.status_icon, {backgroundColor: Util.taskHelper.getColorByStatus(task.task_status_formatted)}]}></View>;
@@ -155,7 +164,9 @@
 
           if (task.priority_id) {
             priority_icon =
-            <Text style={styles.priority_icon}>{Util.taskHelper.getSignByPriority(task.priority_id)}</Text>;
+            <View style={styles.priority_icon}>
+              <Text style={styles.priority_icon_text}>{Util.taskHelper.getSignByPriority(task.priority_id)}</Text>
+            </View>;
           }
         }
 
@@ -227,10 +238,18 @@
       marginBottom: 2,
     },
     priority_icon: {
-      color: '#dd1f00',
-      fontSize: 10,
+      backgroundColor: AppConfig.textWarning,
       marginTop: 2,
       marginBottom: 2,
+      paddingTop: 1,
+      paddingBottom: 1,
+      paddingLeft: 2,
+      paddingRight: 2,
+      borderRadius: 5,
+    },
+    priority_icon_text: {
+      fontSize: 10,
+      color: '#fff',
       fontWeight: 'bold',
     },
     repeat_icon: {

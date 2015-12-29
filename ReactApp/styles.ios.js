@@ -293,4 +293,7 @@
       color:  AppConfig.textSecondary,
       fontSize: 12,
     },
+    textWarning: {
+      color: AppConfig.textWarning, 
+    }
   });
