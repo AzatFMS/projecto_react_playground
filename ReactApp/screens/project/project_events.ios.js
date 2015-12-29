@@ -117,7 +117,6 @@
         period = <View style={styles.right_block}>
           <Text style={styles.date}>{event.formattedTimeStart}</Text>
           <Text style={styles.time}>{moment.unix(event.time_start).format("HH:mm")}</Text>
-          <Text style={styles.date}>-</Text>
           <Text style={styles.date}>{event.formattedTimeEnd}</Text>
           <Text style={styles.time}>{moment.unix(event.time_end).format("HH:mm")}</Text>
         </View>;
