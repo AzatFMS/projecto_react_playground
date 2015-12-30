@@ -1371,7 +1371,7 @@ throw new TypeError(
 
 var index=findIndex.call(this,predicate,context);
 return index === -1?undefined:this[index];}});}})();
-__d('StarterKit/index.ios.js',["react-native/Libraries/react-native/react-native.js","EventEmitter","Subscribable","react-native-navbar/index.js","react-native-side-menu/index.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/components/icons.ios.js","StarterKit/ReactApp/components/menu.ios.js","StarterKit/ReactApp/screens/projects.ios.js","StarterKit/ReactApp/screens/start.ios.js","StarterKit/ReactApp/store.js","tcomb-form-native/index.js","StarterKit/ReactApp/util.ios.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__ = superClass;}
+__d('StarterKit/index.ios.js',["react-native/Libraries/react-native/react-native.js","EventEmitter","Subscribable","react-native-navbar/index.js","react-native-side-menu/index.js","StarterKit/ReactApp/components/icons.ios.js","StarterKit/ReactApp/components/menu.ios.js","StarterKit/ReactApp/screens/projects.ios.js","StarterKit/ReactApp/screens/start.ios.js","StarterKit/ReactApp/store.js","tcomb-form-native/index.js","StarterKit/ReactApp/util.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__ = superClass;}
 
 
 
@@ -54870,13 +54870,13 @@ navbar_button:{
 width:30,
 height:30,
 marginLeft:10,
-marginTop:23},
+marginTop:24},
 
 navbar_button_right:{
 width:30,
 height:30,
 marginRight:10,
-marginTop:23},
+marginTop:24},
 
 navbar_title:{
 color:'#FFFFFF',
@@ -54965,7 +54965,7 @@ exports.textIcon = "#777";
 exports.subtleGreyBorder = "#E7E7E7";
 exports.textWarning = "#dd1f00";
 });
-__d('StarterKit/ReactApp/components/icons.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__ = superClass;}
+__d('StarterKit/ReactApp/components/icons.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__ = superClass;}
 
 
 
@@ -55414,7 +55414,7 @@ var SMXLoadingImageView=requireNativeComponent('FAKIconImage',SMXLoadingImage);
 
 module.exports = SMXLoadingImage;
 });
-__d('StarterKit/ReactApp/components/menu.ios.js',["react-native/Libraries/react-native/react-native.js","EventEmitter","Subscribable","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/projects.ios.js","StarterKit/ReactApp/screens/calendars.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/util.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/screens/inbox/inbox.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/menu.ios.js',["react-native/Libraries/react-native/react-native.js","EventEmitter","Subscribable","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/projects.ios.js","StarterKit/ReactApp/screens/calendars.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/util.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/screens/inbox/inbox.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -55650,7 +55650,7 @@ borderRadius:20}});
 
 module.exports = Menu;
 });
-__d('StarterKit/ReactApp/screens/projects.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/project/project.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/store.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-timer-mixin/TimerMixin.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/projects.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/project/project.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/store.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-timer-mixin/TimerMixin.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -55876,7 +55876,7 @@ height:30}});
 
 module.exports = Projects;
 });
-__d('StarterKit/ReactApp/screens/project/project.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/project/project_resume.ios.js","StarterKit/ReactApp/screens/project/project_tasks.ios.js","StarterKit/ReactApp/screens/project/project_events.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/screens/project/project_notes.ios.js","StarterKit/ReactApp/screens/project/project_files.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/project/project_resume.ios.js","StarterKit/ReactApp/screens/project/project_tasks.ios.js","StarterKit/ReactApp/screens/project/project_events.ios.js","StarterKit/ReactApp/screens/project/project_notes.ios.js","StarterKit/ReactApp/screens/project/project_files.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -56014,7 +56014,7 @@ module.exports = Project;
 module.exports.details = {
 title:'Проекты'};
 });
-__d('StarterKit/ReactApp/screens/project/project_resume.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","Collapsible","StarterKit/ReactApp/screens/project/project_targets.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/screens/project/project_members.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_resume.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","Collapsible","StarterKit/ReactApp/screens/project/project_targets.ios.js","StarterKit/ReactApp/screens/project/project_members.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -56431,7 +56431,7 @@ this.props.children)));}});
 
 module.exports = Collapsible;
 });
-__d('StarterKit/ReactApp/screens/project/project_targets.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/target/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_targets.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/target/list.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -56672,7 +56672,7 @@ module.exports = Store;
 module.exports.details = {
 title:'Store'};
 });
-__d('StarterKit/ReactApp/components/target/list.ios.js',["react-native/Libraries/react-native/react-native.js","moment/moment.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/target/list.ios.js',["react-native/Libraries/react-native/react-native.js","moment/moment.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60064,7 +60064,7 @@ var _moment=utils_hooks__hooks;
 
 return _moment;});
 });
-__d('StarterKit/ReactApp/components/loader.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/loader.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60110,7 +60110,7 @@ var styles=StyleSheet.create({});
 
 module.exports = Loader;
 });
-__d('StarterKit/ReactApp/components/list/separator.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/list/separator.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60154,7 +60154,7 @@ marginLeft:10}});
 
 module.exports = ListSeparator;
 });
-__d('StarterKit/ReactApp/components/list/loader.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/list/loader.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60199,7 +60199,7 @@ var styles=StyleSheet.create({});
 
 module.exports = ListLoader;
 });
-__d('StarterKit/ReactApp/components/list/no_items.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/list/no_items.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60243,7 +60243,7 @@ var styles=StyleSheet.create({});
 
 module.exports = NoItems;
 });
-__d('StarterKit/ReactApp/components/list/will_refresh.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/list/will_refresh.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60295,7 +60295,7 @@ var styles=StyleSheet.create({});
 
 module.exports = ListWillRefresh;
 });
-__d('StarterKit/ReactApp/components/list/refresh_idle.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/list/refresh_idle.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60665,7 +60665,7 @@ module.exports = RefreshInfiniteListView;
 });
 __d('react-native-refresh-infinite-listview/pull_arrow.png',[],function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/agumerov/mobile/projecto_ios/node_modules/react-native-refresh-infinite-listview","httpServerLocation":"/assets/node_modules/react-native-refresh-infinite-listview","width":80,"height":80,"scales":[1],"files":["/Users/agumerov/mobile/projecto_ios/node_modules/react-native-refresh-infinite-listview/pull_arrow.png"],"hash":"5cfbb1c8c74d864a35066e1bbc40e062","name":"pull_arrow","type":"png"});
 });
-__d('StarterKit/ReactApp/screens/project/project_members.ios.js',["react-native/Libraries/react-native/react-native.js","moment/moment.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_members.ios.js',["react-native/Libraries/react-native/react-native.js","moment/moment.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -60899,7 +60899,7 @@ module.exports = ProjectMembers;
 module.exports.details = {
 title:'Участники проекта'};
 });
-__d('StarterKit/ReactApp/screens/project/project_tasks.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/task/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_tasks.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/components/task/list.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61011,6 +61011,7 @@ React.StyleSheet;var View=React.View;var Text=React.Text;var Component=React.Com
 var ListTasks=React.createClass({displayName:'ListTasks',
 
 getInitialState:function(){
+
 return {
 isLoading:true,
 tasks:[],
@@ -61240,7 +61241,7 @@ fontSize:10}});
 
 module.exports = ListTasks;
 });
-__d('StarterKit/ReactApp/screens/project/project_events.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/event/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_events.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/event/list.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61298,7 +61299,7 @@ marginBottom:50}});
 
 module.exports = ProjectEvents;
 });
-__d('StarterKit/ReactApp/components/event/list.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","moment/moment.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/event/list.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","moment/moment.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","react-native-icons/index.ios.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61498,7 +61499,7 @@ marginBottom:5}});
 
 module.exports = ListEvents;
 });
-__d('StarterKit/ReactApp/screens/project/project_notes.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/note/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_notes.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/note/list.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61556,7 +61557,7 @@ marginBottom:50}});
 
 module.exports = ProjectNotes;
 });
-__d('StarterKit/ReactApp/components/note/list.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","moment/moment.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/note/list.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","moment/moment.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61723,7 +61724,7 @@ fontSize:16}});
 
 module.exports = ListNotes;
 });
-__d('StarterKit/ReactApp/screens/project/project_files.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/file/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/project/project_files.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/file/list.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61783,7 +61784,7 @@ module.exports = ProjectFiles;
 module.exports.details = {
 title:'Файлы проекта'};
 });
-__d('StarterKit/ReactApp/components/file/list.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","moment/moment.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/components/file/list.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","react-native-icons/index.ios.js","moment/moment.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/loader.ios.js","StarterKit/ReactApp/components/list/separator.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/components/list/loader.ios.js","StarterKit/ReactApp/components/list/will_refresh.ios.js","StarterKit/ReactApp/components/list/refresh_idle.ios.js","react-native-refresh-infinite-listview/RefreshInfiniteListView.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -61978,7 +61979,7 @@ fontSize:16}});
 
 module.exports = ListFiles;
 });
-__d('StarterKit/ReactApp/screens/inbox/inbox.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/inbox/notices.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/screens/inbox/my_tasks.ios.js","StarterKit/ReactApp/screens/inbox/controlled_tasks.ios.js","StarterKit/ReactApp/screens/inbox/assigned_tasks.ios.js","StarterKit/ReactApp/screens/inbox/events.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/inbox/inbox.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/inbox/notices.ios.js","StarterKit/ReactApp/screens/inbox/my_tasks.ios.js","StarterKit/ReactApp/screens/inbox/controlled_tasks.ios.js","StarterKit/ReactApp/screens/inbox/assigned_tasks.ios.js","StarterKit/ReactApp/screens/inbox/events.ios.js","react-native-icons/index.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -62021,6 +62022,7 @@ require('react-native-icons/index.ios.js');var Icon=_require.Icon;var TabBarIOS=
 var Inbox=React.createClass({displayName:'Inbox',
 
 getInitialState:function(){
+
 return {
 selectedTab:'notices'};},
 
@@ -62111,7 +62113,7 @@ tab_content:{}});
 
 module.exports = Inbox;
 });
-__d('StarterKit/ReactApp/screens/inbox/notices.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/inbox/notices.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/list/no_items.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -62168,7 +62170,7 @@ marginBottom:50}});
 
 module.exports = Notices;
 });
-__d('StarterKit/ReactApp/screens/inbox/my_tasks.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/task/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/inbox/my_tasks.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/components/task/list.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -62262,7 +62264,7 @@ var ControlledTasks=React.createClass({displayName:'ControlledTasks',
 render:function(){
 return (
 React.createElement(View,{style:styles.container},
-React.createElement(ListTasks,{source_url:Util.buildUrl('/inbox/my')})));}});
+React.createElement(ListTasks,{source_url:Util.buildUrl('/inbox/controlled')})));}});
 
 
 
@@ -62284,7 +62286,7 @@ marginBottom:50}});
 
 module.exports = ControlledTasks;
 });
-__d('StarterKit/ReactApp/screens/inbox/assigned_tasks.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/task/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/inbox/assigned_tasks.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/components/task/list.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -62342,7 +62344,7 @@ marginBottom:50}});
 
 module.exports = AssignedTasks;
 });
-__d('StarterKit/ReactApp/screens/inbox/events.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/event/list.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/inbox/events.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/util.ios.js","StarterKit/ReactApp/components/event/list.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -62400,7 +62402,7 @@ marginBottom:50}});
 
 module.exports = Events;
 });
-__d('StarterKit/ReactApp/screens/calendars.ios.js',["react-native/Libraries/react-native/react-native.js","react-native-calendar/CalendarIOS.js","moment/moment.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/calendars.ios.js',["react-native/Libraries/react-native/react-native.js","react-native-calendar/CalendarIOS.js","moment/moment.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
@@ -75358,7 +75360,7 @@ root._ = _;}}).
 
 call(this);
 });
-__d('StarterKit/ReactApp/screens/start.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/styles.ios.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/projects.ios.js","StarterKit/ReactApp/db.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/store.js"],function(global, require, module, exports) {  'use strict';
+__d('StarterKit/ReactApp/screens/start.ios.js',["react-native/Libraries/react-native/react-native.js","StarterKit/ReactApp/config.ios.js","StarterKit/ReactApp/screens/projects.ios.js","StarterKit/ReactApp/db.ios.js","react-native-icons/index.ios.js","StarterKit/ReactApp/store.js","StarterKit/ReactApp/styles.ios.js"],function(global, require, module, exports) {  'use strict';
 
 
 
