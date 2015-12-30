@@ -34,7 +34,7 @@
     render: function() {
         return (
           <View style={styles.container}>
-            <ListTasks source_url={Util.buildUrl('/inbox/my')}/>
+            <ListTasks source_url={Util.buildUrl('/inbox/controlled')}/>
           </View>
         );
     }

@@ -41,6 +41,7 @@
   var Inbox = React.createClass({
 
     getInitialState: function() {
+
       return {
           selectedTab: 'notices',
         };
