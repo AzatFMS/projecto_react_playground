@@ -258,13 +258,13 @@
       width: 30,
       height: 30,
       marginLeft: 10,
-      marginTop: 23,
+      marginTop: 24,
     },
     navbar_button_right: {
       width: 30,
       height: 30,
       marginRight: 10,
-      marginTop: 23,
+      marginTop: 24,
     },
     navbar_title: {
       color: '#FFFFFF',
@@ -294,6 +294,6 @@
       fontSize: 12,
     },
     textWarning: {
-      color: AppConfig.textWarning, 
+      color: AppConfig.textWarning,
     }
   });
