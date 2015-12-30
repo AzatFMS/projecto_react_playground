@@ -19,9 +19,8 @@
   var AppConfig = require('../config.ios');
 
   // Screens / Pages
-  var Index = require('../screens/tabbar.ios');
   var Projects = require('../screens/projects.ios');
-  var ComingSoon = require('../screens/soon.ios');
+  var Inbox = require('../screens/inbox/inbox.ios');
   var Calendars = require('../screens/calendars.ios');
   var ListSeparator = require('./list/separator.ios');
 
@@ -101,11 +100,9 @@ var Menu = React.createClass({
 
     // ['**TITLE**', '**MODULE_NAME**']
     var links = [
+      ['Инбокс', Inbox, 'fontawesome|inbox'],
       ['Проекты', Projects, 'fontawesome|briefcase'],
       ['Календари', Calendars, 'fontawesome|calendar'],
-      //['Инбокс', Index],
-      //['Заметки', FormExample],
-      //['Файлы', ComingSoon],
     ];
 
     // Build the actual Menu Items

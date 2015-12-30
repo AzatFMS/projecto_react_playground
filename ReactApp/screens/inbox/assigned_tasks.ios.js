@@ -18,7 +18,7 @@
 
   var Util = require('../../util.ios');
 
-  var ListFiles = require('../../components/file/list.ios');
+  var ListTasks = require('../../components/task/list.ios');
 
   var {
     StyleSheet,
@@ -30,11 +30,11 @@
 /* ==============================
   View
   =============================== */
-  var ProjectFiles = React.createClass({
+  var AssignedTasks = React.createClass({
     render: function() {
         return (
           <View style={styles.container}>
-            <ListFiles source_url={Util.buildUrl('/projects/files/' + this.props.project.id)}/>
+            <ListTasks source_url={Util.buildUrl('/inbox/assigned')}/>
           </View>
         );
     }
@@ -54,7 +54,4 @@
 /* ==============================
   Done!
   =============================== */
-  module.exports = ProjectFiles;
-  module.exports.details = {
-    title: 'Файлы проекта'
-  };
+  module.exports = AssignedTasks;

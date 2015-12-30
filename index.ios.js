@@ -23,7 +23,6 @@
   var Menu = require('./ReactApp/components/menu.ios');
 
   // Screens / Pages
-  var Index = require('./ReactApp/screens/tabbar.ios');
   var Projects = require('./ReactApp/screens/projects.ios');
   var StartScreen = require('./ReactApp/screens/start.ios');
 

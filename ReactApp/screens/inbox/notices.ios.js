@@ -18,7 +18,7 @@
 
   var Util = require('../../util.ios');
 
-  var ListFiles = require('../../components/file/list.ios');
+  var NoItems = require('../../components/list/no_items.ios');
 
   var {
     StyleSheet,
@@ -30,15 +30,14 @@
 /* ==============================
   View
   =============================== */
-  var ProjectFiles = React.createClass({
+  var Notices = React.createClass({
     render: function() {
         return (
           <View style={styles.container}>
-            <ListFiles source_url={Util.buildUrl('/projects/files/' + this.props.project.id)}/>
+            <NoItems text="Нет уведомлений"/>
           </View>
         );
-    }
-
+      }
   });
 
 /* ==============================
@@ -54,7 +53,4 @@
 /* ==============================
   Done!
   =============================== */
-  module.exports = ProjectFiles;
-  module.exports.details = {
-    title: 'Файлы проекта'
-  };
+  module.exports = Notices;
