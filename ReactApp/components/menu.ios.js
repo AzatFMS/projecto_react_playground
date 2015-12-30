@@ -22,9 +22,8 @@
   var Index = require('../screens/tabbar.ios');
   var Projects = require('../screens/projects.ios');
   var ComingSoon = require('../screens/soon.ios');
-  var FormExample = require('../modules/example/screens/forms.ios');
   var Calendars = require('../screens/calendars.ios');
-  var ListSeparator = require('./list_separator.ios');
+  var ListSeparator = require('./list/separator.ios');
 
   var Util = require('../util.ios');
 

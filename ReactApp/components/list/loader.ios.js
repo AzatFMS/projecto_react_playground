@@ -14,30 +14,31 @@
   var React = require('react-native');
 
   // App Globals
-  var AppStyles = require('../styles.ios');
-  var AppConfig = require('../config.ios');
+  var AppStyles = require('../../styles.ios');
+  var AppConfig = require('../../config.ios');
 
   var {
     View,
     Component,
     StyleSheet,
     ActivityIndicatorIOS,
-    Text,
   } = React;
 
-  var NoItems = React.createClass({
+  var ListLoader = React.createClass({
 
-    render: function() {
-      return (
-        <View style={[AppStyles.container, AppStyles.containerCentered]}>
-          <Text style={AppStyles.baseText}>{this.props.text}</Text>
-        </View>
-        );
-      },
+  render: function() {
+    return (
+      <View style={{height: 50, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicatorIOS
+          size="large"
+          color="{AppConfig.textMain}"
+        />
+      </View>
+      );
+    },
   });
 
   var styles = StyleSheet.create({
-
   });
 
-  module.exports = NoItems;
+  module.exports = ListLoader;

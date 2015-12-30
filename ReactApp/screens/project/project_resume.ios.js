@@ -22,7 +22,7 @@
   var ProjectTargets = require('./project_targets.ios');
   var ProjectMembers = require('./project_members.ios');
   var Util = require('../../util.ios');
-  var ListSeparator = require('../../components/list_separator.ios');
+  var ListSeparator = require('../../components/list/separator.ios');
   var Loader = require('../../components/loader.ios');
 
 

@@ -14,8 +14,8 @@
   var React = require('react-native');
 
   // App Globals
-  var AppStyles = require('../styles.ios');
-  var AppConfig = require('../config.ios');
+  var AppStyles = require('../../styles.ios');
+  var AppConfig = require('../../config.ios');
 
   var {Icon, TabBarIOS} = require('react-native-icons');
 

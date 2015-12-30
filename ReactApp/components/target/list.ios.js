@@ -18,12 +18,13 @@
   var AppConfig = require('../../config.ios');
 
   var Util = require('../../util.ios');
-  var ListSeparator = require('../../components/list/separator.ios');
-  var Loader = require('../../components/loader.ios');
-  var NoItems = require('../../components/list/no_items.ios');
-  var ListLoader = require('../../components/list/loader.ios');
-  var ListWillRefresh = require('../../components/list/will_refresh.ios');
-  var ListRefreshIdle = require('../../components/list/refresh_idle.ios');
+  var Loader = require('../loader.ios');
+  var ListSeparator = require('../list/separator.ios');
+  var ListLoader = require('../list/loader.ios');
+  var NoItems = require('../list/no_items.ios');
+  var ListLoader = require('../list/loader.ios');
+  var ListWillRefresh = require('../list/will_refresh.ios');
+  var ListRefreshIdle = require('../list/refresh_idle.ios');
 
   var RefreshInfiniteListView = require('react-native-refresh-infinite-listview');
 
@@ -40,51 +41,40 @@
     TouchableOpacity,
     ListView,
     ScrollView,
-    Image,
   } = React;
 
 /* ==============================
   View
   =============================== */
-  var ProjectMembers = React.createClass({
+  var ListTargets = React.createClass({
 
     getInitialState: function() {
       return {
           isLoading: true,
-          members: [],
-          membersDataSource: new ListView.DataSource({
+          targets: [],
+          targetsDataSource: new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
           }),
-          project: this.props.route.project,
         };
     },
 
     componentDidMount: function() {
-      this.fetchMembers();
+      this.fetchTargets();
     },
 
-    fetchMembers: function() {
-       fetch(Util.buildUrl('/projects/members/' + this.state.project.id ))
+    fetchTargets: function() {
+       fetch(this.props.source_url)
       .then(response => response.json())
       .then(jsonData => {
-            var _self = this;
+
             jsonData
             .sort(function(a, b) {
-              if (a.id == _self.state.project.uid) {
-                return -1;
-              }
-              if (b.id == _self.state.project.uid) {
-                return 1;
-              }
-              if(a.formatted_name < b.formatted_name) return -1;
-              if(a.formatted_name > b.formatted_name) return 1;
-              return 0;
+                return parseInt(b.object_time) - parseInt(a.object_time);
             });
-
             this.setState({
                isLoading: false,
-               members: jsonData,
-               membersDataSource: this.state.membersDataSource.cloneWithRows(jsonData)
+               targets: jsonData,
+               targetsDataSource: this.state.targetsDataSource.cloneWithRows(jsonData)
             });
             this.list.hideHeader();
             this.list.hideFooter();
@@ -94,80 +84,59 @@
     render: function() {
       if (this.state.isLoading) {
         return this.renderLoadingMessage();
-      } else if (!this.state.members.length) {
-        return this.renderNoMembers();
+      } else if (!this.state.targets.length) {
+        return this.renderNoTargets();
       } else {
         return this.renderResults();
       }
-    },
-    refreshMembers: function() {
-      this.fetchMembers();
     },
     renderLoadingMessage: function() {
       return (
           <Loader/>
         );
     },
-    renderNoMembers: function() {
+    renderNoTargets: function() {
       return (
-          <NoItems text="Нет участников"/>
+          <NoItems text="Нет целей"/>
         );
     },
-    renderMember: function(member) {
-
-      var avatar, workpost;
-      if (member.profileData && member.profileData.avatar) {
-        avatar = <Image
-          style={styles.thumbnail}
-          source={{uri: AppConfig.api_url + '/' + member.profileData.avatar}}
-          />;
-      } else {
-        avatar = <Icon
-         name={'fontawesome|user'}
-         size={30}
-         color={AppConfig.textMain}
-         style={styles.thumbnail}
-         />;
-      }
-
-      if (member.workPost && member.workPost.post_name) {
-        workpost =
-        <Text style={AppStyles.list_row_subtitle}>
-          {member.workPost.post_name}
-        </Text>;
-      }
-
+    refreshTargets: function() {
+      this.fetchTargets();
+    },
+    renderTarget: function(target) {
 
         return (
-          <TouchableOpacity style={AppStyles.list_row}>
-            {avatar}
+          <View style={AppStyles.list_row}>
             <View style={AppStyles.list_row_main}>
               <Text style={AppStyles.list_row_title}>
-                {member.formatted_name} {member.id == this.state.project.uid ? '(Автор)' : ''}
+                {target.name}
               </Text>
-              {workpost}
+              <Text style={AppStyles.list_row_subtitle}>
+                {Util.targetsHelper.getStatusName(target.object_status)}
+              </Text>
             </View>
-          </TouchableOpacity>
+            <View style={styles.right_block}>
+              <Text style={styles.target_date}>{target.formattedObjectTime}</Text>
+            </View>
+          </View>
         );
       },
     renderResults: function() {
         return (
-          <View style={styles.container}>
             <RefreshInfiniteListView
             ref = {(list) => {this.list = list}}
-            dataSource={this.state.membersDataSource}
-            onRefresh={this.refreshMembers}
-            onInfinite={this.refreshMembers}
+            dataSource={this.state.targetsDataSource}
+            onRefresh={this.refreshTargets}
+            onInfinite={this.refreshTargets}
             renderHeaderRefreshIdle={()=> {return (<ListRefreshIdle/>)}}
             renderHeaderWillRefresh={()=> {return (<ListWillRefresh/>)}}
             renderHeaderRefreshing={()=> {return (<ListLoader/>)}}
             renderFooterWillInifite={()=> {return (<ListWillRefresh/>)}}
             renderFooterInifiteIdle={()=> {return (<ListRefreshIdle reverse={true}/>)}}
             renderFooterInifiting={()=> {return (<ListLoader/>)}}
-            renderRow={this.renderMember}
+            renderRow={this.renderTarget}
             renderSeparator={()=> {return (<ListSeparator/>)}}
             />
-          </View>
         );
       }
 
@@ -213,22 +182,16 @@
     },
     right_block: {
       width: 60,
-      height: 40,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    thumbnail: {
-      width: 30,
-      height: 30,
-      marginRight: 10,
-      borderRadius: 15,
+    target_date: {
+      color:  AppConfig.textSecondary,
+      fontSize: 10,
     },
   });
 
 /* ==============================
   Done!
   =============================== */
-  module.exports = ProjectMembers;
-  module.exports.details = {
-    title: 'Участники проекта'
-  };
+  module.exports = ListTargets;

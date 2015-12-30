@@ -3,7 +3,6 @@
  * https://github.com/mcnamee/react-native-starter-app
  */
 'use strict';
-
 /* ==============================
   Initialise App
   =============================== */

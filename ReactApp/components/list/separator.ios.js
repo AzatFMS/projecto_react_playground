@@ -14,8 +14,8 @@
   var React = require('react-native');
 
   // App Globals
-  var AppStyles = require('../styles.ios');
-  var AppConfig = require('../config.ios');
+  var AppStyles = require('../../styles.ios');
+  var AppConfig = require('../../config.ios');
 
   var {
     View,
@@ -36,6 +36,7 @@
     separator: {
       borderBottomWidth: 1,
       borderBottomColor: AppConfig.subtleGreyBorder,
+      marginLeft: 10,
     }
   });
 
